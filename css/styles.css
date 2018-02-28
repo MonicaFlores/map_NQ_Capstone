@@ -1,0 +1,181 @@
+
+#my-map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.leaflet-control-layers-expanded {
+  /*content: "Key Stakeholders";*/
+  background: #FFF;
+  padding: 12px;
+  margin-left: 15px;
+  font-family: 'Roboto Condensed', monospace, sans-serif;
+  border-radius:10px;
+  border-style: dashed;
+  border-width: 2px ;
+  border-color: black;
+  text-align: left;
+  font-size: 12px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.leaflet-popup-content-wrapper {
+    font-family: 'Roboto Condensed', monospace, sans-serif;
+    font-size: 12px;
+    border-color: black;
+    border-width: 2px ;
+}
+
+#title-box {
+  width: 350px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 10px;
+  left: 10px;
+  background: #FFF;
+  padding: 15px;
+  border-radius: 7px;
+  opacity: 0.8;
+  font-family: 'Roboto Condensed', sans-serif;
+  color:black;
+  border-radius:10px;
+  border-style: solid;
+  border-width: 2px ;
+  border-color: black;
+  text-align: left;
+}
+
+#legend {
+  width:150px;
+  float: right;
+  background: #e6e6e6;
+  padding: 12px;
+  margin-left: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+  color:black;
+  border-radius:10px;
+  border-style: dashed;
+  border-width: 2px ;
+  border-color: grey;
+  text-align: left;
+  font-size: 12px;
+}
+
+#legend:hover {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px ;
+}
+
+/*LEGEND*/
+.legendItem {
+}
+
+.legendItem::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  -moz-border-radius: 7.5px;
+  -webkit-border-radius: 7.5px;
+  border-radius: 16.5px;
+  position: relative;
+  top: 4px;
+  margin-right: 5px;
+  font-size: 10px;
+}
+
+body{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  color: black;
+  /*font-weight: 200;*/
+}
+h1{
+  font-size: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+}
+h3{
+  font-size: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+}
+button {
+  outline: none;
+  padding: 6px;
+  border-style: solid;
+  border-width: 1px ;
+  border-color: black;
+  background-color: white;
+  border-radius: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+button:hover {
+    border-style: dashed;
+    border-width: 2px ;
+}
+
+
+
+.vacant::before {
+  background-color: #e80000;
+  border-color: black;
+}
+
+.cgarden::before {
+  background-color: #157a03;
+  border-color: black;
+}
+
+.cds::before {
+  background-color: white;
+  fill-Opacity: 0.1;
+  border-style: dashed;
+  border-color: black;
+  border-width: 1.5px ;
+
+}
+
+/*Links*/
+/* unvisited link */
+a:link {
+    color: black;
+    text-decoration: none;
+    font-weight: 800;
+}
+/* visited link */
+a:visited {
+    color: black;
+    font-weight: 800;
+}
+/* mouse over link */
+a:hover {
+    color: black;
+    font-weight: 800;
+    text-decoration: underline;
+}
+/* selected link */
+a:active {
+    color: white;
+    font-weight: 200;
+    }
+/*hover header
+#header:hover {
+    color:white;
+    border-color: white;
+    background-color: #c4c4d4;
+    opacity: 0.8;
+}*/
+
+.circleMarker:hover{
+  border-style: dashed;
+  border-color: black;
+  border-width: 2px ;
+}
