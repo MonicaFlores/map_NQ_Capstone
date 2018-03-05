@@ -32,7 +32,13 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 	        fillOpacity: 0.9,
 	        weight: 1,}
 		},
+
 		onEachFeature: function(feature, layer) {
+			//Calc centroid with TURF
+			var polygon = turf.polygon(polygon.coordinates);
+			var center = turf.centerOfMass(polygon);
+
+
 			//Format area
 			var areasqft = numeral(feature.properties.LotArea).format('0,0')
 
