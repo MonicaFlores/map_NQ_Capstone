@@ -69,6 +69,7 @@ var landGeojson = L.geoJSON(land, {
 
     layer.on('mouseover', function(e){
       this.openPopup();
+			initialize();
       e.target.setStyle({
         weight: 0.5,
         color: 'grey',
@@ -81,25 +82,14 @@ var landGeojson = L.geoJSON(land, {
 		//mouse out
     layer.on('mouseout', function (e) {
       this.closePopup();
-					initialize();
       landGeojson.resetStyle(e.target);
 			//Test empty array for clear map
 			//map.setStreetView([]);
     });
 
 		//Tried to add panorma with a click on function, didn't work
-		// var panorama;
-		// layer.onclick(function initialize() {
-		// 	var center = {lat: centerFeature.geometry.coordinates[1], lon: centerFeature.geometry.coordinates[0]}
-		// 	var panoramaOptions = {position: center,
-		// 			pov: {heading: 34,
-		// 				pitch: 10},
-		// 			visible: true};
-		// 	var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-		// 	});
-
-		//Add Street view when click on feauture
-
+		// onclick: function(){
+		// 	initialize()};
 
 	}
 }).addTo(map);
@@ -126,7 +116,8 @@ var landGeojson = L.geoJSON(land, {
 			                    <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
 													<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
 																${feature.properties.CommFAR} commercial;
-																${feature.properties.FacilFAR} facilities`, {
+																${feature.properties.FacilFAR} facilities
+																      <div id="pano"></div>`, {
 					closeButton: false,
 					minWidth: 60,
 					offset: [0, -10],
