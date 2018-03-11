@@ -10,7 +10,7 @@
 #pano {
   width: 350px;
   height: 200px;
-  position: absolute;
+  position: relative;
   z-index: 1000;
   top: 10px;
   left: 10px;
@@ -175,13 +175,7 @@ a:active {
     color: white;
     font-weight: 200;
     }
-/*hover header
-#header:hover {
-    color:white;
-    border-color: white;
-    background-color: #c4c4d4;
-    opacity: 0.8;
-}*/
+
 
 .circleMarker:hover{
   border-style: dashed;

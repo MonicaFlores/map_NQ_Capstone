@@ -24,14 +24,7 @@ var CDsGeojson = L.geoJSON(CDs,{
 // var lat = 0; //Empty variable
 // var long = 0; //Empty variable
 var panorama;
-var center = [];//Empty array
-
-function initialize() {
-	var panoramaOptions = {position: center,
-			pov: {heading: 34,
-				pitch: 10},};
-	var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-	};
+var defaultCenter = [];//Empty array
 
 //Add vacant land
 var landGeojson = L.geoJSON(land, {
@@ -45,52 +38,40 @@ var landGeojson = L.geoJSON(land, {
 	onEachFeature: function(feature, layer) {
 		//Format area
 		var areasqft = numeral(feature.properties.LotArea).format('0,0')
-		//Calc centroid with TURF, use it later for displaying photo
-		centerFeature = turf.centerOfMass(feature);
-		//Extract lat long from turf centroid
-		center.push({lat: centerFeature.geometry.coordinates[1], lon: centerFeature.geometry.coordinates[0]})
 
 		//Popup content
-    layer.bindPopup(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
-												at ${feature.properties.Address}.<br/>
-										<b style='font-size: 120%'> //</b> <br/>
-										<b style='font-size: 120%'> Owner:</b> ${feature.properties.OwnerName}.<br/>
-                    <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
-										<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
-													${feature.properties.CommFAR} commercial;
-													${feature.properties.FacilFAR} facilities.<br/>
-										<div id="pano"></div>`,
-										{closeButton: false,
-								     minWidth: 60,
-								     offset: [0, -10]
-								    }
+    layer.bindPopup(`
+			<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
+						at ${feature.properties.Address}.<br/>
+				<b style='font-size: 120%'> //</b> <br/>
+				<b style='font-size: 120%'> Owner:</b> ${feature.properties.OwnerName}.<br/>
+	      <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
+				<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
+							${feature.properties.CommFAR} commercial;
+							${feature.properties.FacilFAR} facilities.<br/>
+				<div id="pano"></div>
+		`, {
+			closeButton: false,
+		 	minWidth: 60,
+		 	offset: [0, -10]
+		});
+		//Calc centroid with TURF, use it later for displaying photo
+		var centerFeature = turf.centerOfMass(feature);
+		//Add Street view when click on feauture
+		layer.on('click', function(e) {
+			var center = centerFeature.geometry.coordinates;
 
-								);
+			var panoramaOptions = {
+				position: {
+					lat: center[1],
+					lng: center[0],
+				}
+			};
+			setTimeout(function() {
+				new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+			}, 200)
 
-    layer.on('mouseover', function(e){
-      this.openPopup();
-			initialize();
-      e.target.setStyle({
-        weight: 0.5,
-        color: 'grey',
-				fillOpacity: 0.7,
-      });
-			//Bring to front
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-          layer.bringToFront()}
-    });
-		//mouse out
-    layer.on('mouseout', function (e) {
-      this.closePopup();
-      landGeojson.resetStyle(e.target);
-			//Test empty array for clear map
-			//map.setStreetView([]);
-    });
-
-		//Tried to add panorma with a click on function, didn't work
-		// onclick: function(){
-		// 	initialize()};
-
+		});
 	}
 }).addTo(map);
 
@@ -116,7 +97,7 @@ var landGeojson = L.geoJSON(land, {
 			                    <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
 													<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
 																${feature.properties.CommFAR} commercial;
-																${feature.properties.FacilFAR} facilities
+																${feature.properties.FacilFAR} facilities.<br/>
 																      <div id="pano"></div>`, {
 					closeButton: false,
 					minWidth: 60,
