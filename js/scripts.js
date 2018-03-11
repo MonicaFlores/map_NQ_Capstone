@@ -36,14 +36,9 @@ var landGeojson = L.geoJSON(land, {
 		//Calc centroid with TURF, use it later for displaying photo
 		var centerFeature = turf.centerOfMass(feature);
 		//Extract lat long from turf centroid
-		var lat = centerFeature.geometry.coordinates[1]
-		var lng = centerFeature.geometry.coordinates[0]
-		//Add lat lon to google maps and create
-		var center = new google.maps.LatLng(lat, lng)
-		var panoramaOptions = {position: center,
-				pov: {heading: 34,
-					pitch: 10}};
-		var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'),panoramaOptions);
+		// var lat = centerFeature.geometry.coordinates[1]
+		// var lng = centerFeature.geometry.coordinates[0]
+
 		//Popup content
     layer.bindPopup(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
 												at ${feature.properties.Address}.<br/>
@@ -66,18 +61,40 @@ var landGeojson = L.geoJSON(land, {
         color: 'grey',
 				fillOpacity: 0.7,
       });
-			//Add Street view when mouseover
-			map.setStreetView(panorama);
+			//Bring to front
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
           layer.bringToFront()}
     });
-
+		//mouse out
     layer.on('mouseout', function (e) {
       this.closePopup();
       landGeojson.resetStyle(e.target);
 			//Test empty array for clear map
-			map.setStreetView([]);
+			//map.setStreetView([]);
     });
+
+		//Tried to add panorma with a click on function, didn't work
+		// var panorama;
+		// layer.onclick(function initialize() {
+		// 	var center = {lat: centerFeature.geometry.coordinates[1], lon: centerFeature.geometry.coordinates[0]}
+		// 	var panoramaOptions = {position: center,
+		// 			pov: {heading: 34,
+		// 				pitch: 10},
+		// 			visible: true};
+		// 	var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+		// 	});
+
+		//Add Street view when click on feauture
+		var panorama;
+		function initialize() {
+			var center = {lat: centerFeature.geometry.coordinates[1], lon: centerFeature.geometry.coordinates[0]}
+			var panoramaOptions = {position: center,
+					pov: {heading: 34,
+						pitch: 10},
+					visible: true};
+			var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+			};
+
 	}
 }).addTo(map);
 
@@ -141,9 +158,7 @@ var culturalArray = []  // empty array
 var heathArray = []  // empty array
 
 getPlaces((places) => {
-
   places.forEach((place) => {
-
 		const typePalette = {
       NQ_Partners: 'GoldenRod ',
       Educational: 'DarkBlue',
