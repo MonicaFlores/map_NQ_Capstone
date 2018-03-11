@@ -11,88 +11,75 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 }).addTo(map);
 
 //Add Community district boundaries
-  var CDsGeojson = L.geoJSON(CDs,
-    {
-      style: function(feature) {
-          return {
-            dashArray: '3 6',
-            color: '#595959',
-            fillColor: 'white',
-            fillOpacity: 0.25,
-            weight: 1.5,}
-      },
-    }).addTo(map);
+var CDsGeojson = L.geoJSON(CDs,{
+  style: function(feature) {
+        return {
+          dashArray: '3 6',
+          color: '#595959',
+          fillColor: 'white',
+          fillOpacity: 0.25,
+          weight: 1.5,}
+    }}).addTo(map);
 
 //Add vacant land
-	var landGeojson = L.geoJSON(land, {
-	  style: function(feature) {
-	      return {
-	        color: '#595959',
-	        fillColor: '#e80000',
-	        fillOpacity: 0.9,
-	        weight: 1,}
-		},
+var landGeojson = L.geoJSON(land, {
+  style: function(feature) {
+      return {
+        color: '#595959',
+        fillColor: '#e80000',
+        fillOpacity: 0.9,
+        weight: 1,}
+	},
+	onEachFeature: function(feature, layer) {
+		//Format area
+		var areasqft = numeral(feature.properties.LotArea).format('0,0')
+		//Calc centroid with TURF, use it later for displaying photo
+		var centerFeature = turf.centerOfMass(feature);
+		//Extract lat long from turf centroid
+		var lat = centerFeature.geometry.coordinates[1]
+		var lng = centerFeature.geometry.coordinates[0]
+		//Add lat lon to google maps and create
+		var center = new google.maps.LatLng(lat, lng)
+		var panoramaOptions = {position: center,
+				pov: {heading: 34,
+					pitch: 10}};
+		var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'),panoramaOptions);
+		//Popup content
+    layer.bindPopup(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
+												at ${feature.properties.Address}.<br/>
+										<b style='font-size: 120%'> //</b> <br/>
+										<b style='font-size: 120%'> Owner:</b> ${feature.properties.OwnerName}.<br/>
+                    <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
+										<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
+													${feature.properties.CommFAR} commercial;
+													${feature.properties.FacilFAR} facilities.<br/>
+										<div id="pano"></div>`,
+										{closeButton: false,
+								     minWidth: 60,
+								     offset: [0, -10]
+								    });
 
+    layer.on('mouseover', function(e){
+      this.openPopup();
+      e.target.setStyle({
+        weight: 0.5,
+        color: 'grey',
+				fillOpacity: 0.7,
+      });
+			//Add Street view when mouseover
+			map.setStreetView(panorama);
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront()}
+    });
 
-		onEachFeature: function(feature, layer) {
-
-			//Calc centroid with TURF, use it later for displaying photo
-			//Not working
-			//var poly = turf.polygon(polygon.coordinates);
-			var centerFeature = turf.centerOfMass(feature);
-			console.log(center)
-
-			var lat = centerFeature.geometry.coordinates[1]
-			var lng = centerFeature.geometry.coordinates[0]
-
-			var center = new google.maps.LatLng(lat, lng)
-
-			var panoramaOptions = {
-			    position: center,
-			    pov: {
-			      heading: 34,
-			      pitch: 10
-			    }
-			  };
-
-			//Format area
-			var areasqft = numeral(feature.properties.LotArea).format('0,0')
-
-	    layer.bindPopup(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
-													at ${feature.properties.Address}.<br/>
-											<b style='font-size: 120%'> //</b> <br/>
-											<b style='font-size: 120%'> Owner:</b> ${feature.properties.OwnerName}.<br/>
-	                    <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
-											<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
-														${feature.properties.CommFAR} commercial;
-														${feature.properties.FacilFAR} facilities`,
-			{closeButton: false,
-	     minWidth: 60,
-	     offset: [0, -10]
-	    });
-	    layer.on('mouseover', function (e) {
-	      this.openPopup();
-
-				var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'),panoramaOptions);
-				map.setStreetView(panorama);
-
-	      e.target.setStyle({
-	        weight: 0.5,
-	        color: 'grey',
-					fillOpacity: 0.7,
-	      });
-
-	      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-	          layer.bringToFront();
-	      }
-
-	    });
-	    layer.on('mouseout', function (e) {
-	      this.closePopup();
-	      landGeojson.resetStyle(e.target);
-	    });
-		}
-	}).addTo(map);
+    layer.on('mouseout', function (e) {
+      this.closePopup();
+      landGeojson.resetStyle(e.target);
+			//Test empty array for clear map
+			map.setStreetView([]);
+    });
+	}
+}).addTo(map);
 
 
 //Add Gardens
