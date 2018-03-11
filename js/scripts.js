@@ -21,6 +21,18 @@ var CDsGeojson = L.geoJSON(CDs,{
           weight: 1.5,}
     }}).addTo(map);
 
+// var lat = 0; //Empty variable
+// var long = 0; //Empty variable
+var panorama;
+var center = [];//Empty array
+
+function initialize() {
+	var panoramaOptions = {position: center,
+			pov: {heading: 34,
+				pitch: 10},};
+	var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+	};
+
 //Add vacant land
 var landGeojson = L.geoJSON(land, {
   style: function(feature) {
@@ -34,10 +46,9 @@ var landGeojson = L.geoJSON(land, {
 		//Format area
 		var areasqft = numeral(feature.properties.LotArea).format('0,0')
 		//Calc centroid with TURF, use it later for displaying photo
-		var centerFeature = turf.centerOfMass(feature);
+		centerFeature = turf.centerOfMass(feature);
 		//Extract lat long from turf centroid
-		// var lat = centerFeature.geometry.coordinates[1]
-		// var lng = centerFeature.geometry.coordinates[0]
+		center.push({lat: centerFeature.geometry.coordinates[1], lon: centerFeature.geometry.coordinates[0]})
 
 		//Popup content
     layer.bindPopup(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
@@ -52,7 +63,9 @@ var landGeojson = L.geoJSON(land, {
 										{closeButton: false,
 								     minWidth: 60,
 								     offset: [0, -10]
-								    });
+								    }
+
+								);
 
     layer.on('mouseover', function(e){
       this.openPopup();
@@ -68,6 +81,7 @@ var landGeojson = L.geoJSON(land, {
 		//mouse out
     layer.on('mouseout', function (e) {
       this.closePopup();
+					initialize();
       landGeojson.resetStyle(e.target);
 			//Test empty array for clear map
 			//map.setStreetView([]);
@@ -85,19 +99,10 @@ var landGeojson = L.geoJSON(land, {
 		// 	});
 
 		//Add Street view when click on feauture
-		var panorama;
-		function initialize() {
-			var center = {lat: centerFeature.geometry.coordinates[1], lon: centerFeature.geometry.coordinates[0]}
-			var panoramaOptions = {position: center,
-					pov: {heading: 34,
-						pitch: 10},
-					visible: true};
-			var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-			};
+
 
 	}
 }).addTo(map);
-
 
 //Add Gardens
   var gardensGeojson = L.geoJSON(gardens,
