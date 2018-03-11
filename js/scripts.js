@@ -33,11 +33,27 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 	        weight: 1,}
 		},
 
-		onEachFeature: function(feature, layer) {
-			//Calc centroid with TURF
-			var polygon = turf.polygon(polygon.coordinates);
-			var center = turf.centerOfMass(polygon);
 
+		onEachFeature: function(feature, layer) {
+
+			//Calc centroid with TURF, use it later for displaying photo
+			//Not working
+			//var poly = turf.polygon(polygon.coordinates);
+			var centerFeature = turf.centerOfMass(feature);
+			console.log(center)
+
+			var lat = centerFeature.geometry.coordinates[1]
+			var lng = centerFeature.geometry.coordinates[0]
+
+			var center = new google.maps.LatLng(lat, lng)
+
+			var panoramaOptions = {
+			    position: center,
+			    pov: {
+			      heading: 34,
+			      pitch: 10
+			    }
+			  };
 
 			//Format area
 			var areasqft = numeral(feature.properties.LotArea).format('0,0')
@@ -49,13 +65,16 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 	                    <b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>
 											<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
 														${feature.properties.CommFAR} commercial;
-														${feature.properties.FacilFAR} facilities`, {
-	      closeButton: false,
-	      minWidth: 60,
-	      offset: [0, -10]
+														${feature.properties.FacilFAR} facilities`,
+			{closeButton: false,
+	     minWidth: 60,
+	     offset: [0, -10]
 	    });
 	    layer.on('mouseover', function (e) {
 	      this.openPopup();
+
+				var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'),panoramaOptions);
+				map.setStreetView(panorama);
 
 	      e.target.setStyle({
 	        weight: 0.5,
@@ -66,6 +85,7 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 	      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
 	          layer.bringToFront();
 	      }
+
 	    });
 	    layer.on('mouseout', function (e) {
 	      this.closePopup();

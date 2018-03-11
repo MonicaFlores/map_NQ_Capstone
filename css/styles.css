@@ -7,6 +7,15 @@
   left: 0;
 }
 
+#pano {
+  width: 350px;
+  height: 200px;
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  left: 10px;
+}
+
 .leaflet-control-layers-expanded {
   /*content: "Key Stakeholders";*/
   background: #FFF;
