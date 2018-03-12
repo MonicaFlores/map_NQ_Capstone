@@ -24,31 +24,42 @@ var CDsGeojson = L.geoJSON(CDs,{
 // Passed to onEachFeature: on click display info on side pane
 const ClickHandler = (e) => {
   const layer = e.target;
-  // Handle polygon styles
-  // const previousLayer = selected;
-  // selectedLayer = layer;
-  // if (previousLayer) enyBBLs.resetStyle(previousLayer);
-  // selectedLayer.setStyle(highlightStyle);
-  // Update Side Pane for clicked lot
-  expandSidePane();
-	// Get panorama
-	var centerFeature = turf.centerOfMass(e);
-	var center = centerFeature.geometry.coordinates;
-	var panoramaOptions = {
-		position: {
-			lat: center[1],
-			lng: center[0],
-		}
-	};
-	setTimeout(function() {
-		new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-	}, 200)
-
-  const property = layer.feature.properties;
+	const property = layer.feature.properties;
+	// Update Side Pane for clicked lot
+	expandSidePane();
+  // To DO: Handle polygon styles
+	//
   // get lot info
-  getlotInfo(property.bbl).then((lotInfo) => {
-    populatePane(property, lotInfo);
-  });
+	// populatePane(property, lotInfo);
+	// Fill in Property Info tab
+	$('#lot-address').empty();
+	$('#lot-address').append(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
+					at ${property.Address}.<br/>`);
+
+	// streetview
+	$('#pano').empty();
+
+	// Get panorama
+	// var centerFeature = turf.centerOfMass(e);
+	// var center = centerFeature.geometry.coordinates;
+	// var panoramaOptions = {
+	// 	position: {
+	// 		lat: center[1],
+	// 		lng: center[0],
+	// 	}
+	// };
+	// setTimeout(function() {
+	// 	new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+	// }, 200)
+	$('#lot-info').empty();
+	$('#lot-info').append(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
+					at ${property.Address}.<br/>
+			<b style='font-size: 120%'> //</b> <br/>
+			<b style='font-size: 120%'> Owner:</b> ${property.OwnerName}.<br/>
+			<b style='font-size: 120%'> Area:</b> ${numeral(property.LotArea).format('0,0')} sqft.<br/>
+			<b style='font-size: 120%'> FAR:</b>  ${property.ResidFAR} residential;
+						${property.CommFAR} commercial;
+						${property.FacilFAR} facilities.<br/>`);
 };
 
 // Function passed to L.geoJSON's 'style' option - vacant land
@@ -70,7 +81,6 @@ const vacantGardenStyles = (feature) => {
 	};
 
 const propertyActions = (feature, layer) => {
-	var centerFeature = turf.centerOfMass(feature);
   layer.on({
     'click': ClickHandler,
     // 'mouseover': highlightFeature,
@@ -89,7 +99,7 @@ var landGeojson = L.geoJSON(land, {
 
 //Add data on gardens
 var landGeojson = L.geoJSON(gardens, {
-	style: vacantLandStyles,
+	style: vacantGardenStyles,
 	onEachFeature: propertyActions
 	}).addTo(map);
 

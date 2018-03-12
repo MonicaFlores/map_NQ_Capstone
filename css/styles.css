@@ -9,8 +9,15 @@
   left: 0;
   bottom: 0;
   width: 408px;
-  background: #f1f1f1;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+  /* background: #f1f1f1; */
+  /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5); */
+  border-radius: 7px;
+  background: #FFF;
+  opacity: 0.9;
+  border-color: black;
+  border-width: 2px ;
+  box-shadow: none;
+
 }
 
 .pane-collapsed {
@@ -41,6 +48,16 @@
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
+#pane-tabs{
+  font-family: 'Roboto Condensed', monospace, sans-serif;
+  font-size: 12px;
+}
+
+#paneTabsContent{
+  font-family: 'Roboto Condensed', monospace, sans-serif;
+  font-size: 12px;
+  text-align: left;
+}
 
 /*************
 ** Panorama **
@@ -119,9 +136,9 @@
   z-index: 1000;
   bottom: 10px;
   right: 10px;
-  background: #FFF;
   padding: 15px;
   border-radius: 7px;
+  background: #FFF;
   opacity: 0.8;
   font-family: 'Roboto Condensed', sans-serif;
   color:black;
@@ -191,6 +208,10 @@
 /**********
 ** Texts **
 ***********/
+#lot-info {
+  text-align: left;
+}
+
 body{
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 18px;
