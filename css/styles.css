@@ -64,8 +64,8 @@
 **************/
 
 #pano {
-  width: 350px;
-  height: 150px;
+  width: 340px;
+  height: 120px;
   position: relative;
   z-index: 1000;
 }
@@ -119,12 +119,12 @@
 /**********
 ** Popup **
 ***********/
-/* .leaflet-popup-content-wrapper {
+.leaflet-popup-content-wrapper {
     font-family: 'Roboto Condensed', monospace, sans-serif;
-    font-size: 12px;
+    font-size: 10px;
     border-color: black;
     border-width: 2px ;
-} */
+}
 
 /***********
 ** Legend **

@@ -2,15 +2,13 @@
 var partnersArray = []  // empty array
 var educationalArray = []  // empty array
 var culturalArray = []  // empty array
-var heathArray = []  // empty array
 
 getPlaces((places) => {
   places.forEach((place) => {
 		const typePalette = {
       NQ_Partners: 'GoldenRod ',
       Educational: 'DarkBlue',
-      Cultural: 'DarkSlateGray',
-      Health: 'Purple',
+      Cultural: 'Purple',
     };
 		const placeColor = typePalette[place.type];
 		const type = place.type;
@@ -31,11 +29,8 @@ getPlaces((places) => {
 			 	educationalArray.push(
 						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
 
-		} else if (type == 'Cultural') {
+		} else  {
 				culturalArray.push(
-						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
-		} else {
-				heathArray.push(
 						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
 		}
   });
@@ -44,14 +39,12 @@ getPlaces((places) => {
 	var partners  = L.layerGroup(partnersArray)
 	var educational  = L.layerGroup(educationalArray)
 	var cultural  = L.layerGroup(culturalArray)
-	var health  = L.layerGroup(heathArray)
 
 	var amenitiesLayer = {
 //attempt to create sub-layers by amenities-type
 			"NQ Partners": partners,
 			"Educational Institutions": educational,
 			"Cultural Institutions": cultural,
-			"Health Institutions": health,
 	};
 
 	//L.control.layers({}, amenitiesLayer).addTo(map);

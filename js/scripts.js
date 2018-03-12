@@ -53,20 +53,20 @@ const getLotInfo = (property) => {
 }
 
 //Get Panorama
-// const getPano = (layer) => {
-// 	const centerFeature = turf.centerOfMass(layer);
-// 	const center = centerFeature.geometry.coordinates;
-// 	const panoramaOptions = {
-// 		position: {
-// 			lat: center[1],
-// 			lng: center[0],
-// 		}
-// 	};
-// 	$('#pano').append(
-// 	setTimeout(function() {
-// 		new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-// 	}, 100)
-// )}
+const getPano = (layer) => {
+	const centerFeature = turf.centerOfMass(layer);
+	const center = centerFeature.geometry.coordinates;
+	const panoramaOptions = {
+		position: {
+			lat: center[1],
+			lng: center[0],
+		}
+	};
+	$('#pano').append(
+	setTimeout(function() {
+		new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+	}, 100)
+)}
 
 // Passed to onEachFeature: on click display info on side pane - vacant land
 const ClickHandlerVacant = (e) => {
@@ -74,12 +74,13 @@ const ClickHandlerVacant = (e) => {
 	const property = layer.feature.properties;
 	// Update Side Pane for clicked lot
 	expandSidePane();
-	// // Fill in Property Info tab
+	//Fill in Property Title
 	$('#lot-address').empty();
 	getVacantTitle(property)
 	// Panorama
 	$('#pano').empty();
-	// getPano(layer)
+	getPano(layer)
+	//Fill in Property Info
 	$('#lot-info').empty();
 	getLotInfo(property)
 };
@@ -118,19 +119,50 @@ const vacantGardenStyles = (feature) => {
 		weight: 1,};
 	};
 
+const mouseOverStyle = {
+	weight: 0.5,
+	color: 'grey',
+	fillOpacity: 0.7,
+};
+
+const mouseOverFeature = (e) => {
+  const layer = e.target;
+	const property = layer.feature.properties;
+	layer.bindPopup(`${property.Address}.`,{
+	      closeButton: false,
+	      minWidth: 60,
+	      offset: [0, -10]
+	    });
+  layer.setStyle(mouseOverStyle);
+	layer.openPopup();
+  layer.bringToFront();
+};
+
+const mouseOutResetVacant = (e) => {
+  const layer = e.target;
+	layer.closePopup();
+	landGeojson.resetStyle(layer);
+};
+
+const mouseOutResetGarden = (e) => {
+  const layer = e.target;
+	layer.closePopup();
+	gardensGeojson.resetStyle(layer);
+};
+
 const propertyActionsVacant = (feature, layer) => {
   layer.on({
     'click': ClickHandlerVacant,
-    // 'mouseover': highlightFeature,
-    // 'mouseout': resetHighlight
+    'mouseover': mouseOverFeature,
+    'mouseout': mouseOutResetVacant
 	  });
 	};
 
 const propertyActionsGarden = (feature, layer) => {
   layer.on({
     'click': ClickHandlerGarden,
-    // 'mouseover': highlightFeature,
-    // 'mouseout': resetHighlight
+    'mouseover': mouseOverFeature,
+    'mouseout': mouseOutResetGarden
 	  });
 	};
 
@@ -139,9 +171,6 @@ var landGeojson = L.geoJSON(land, {
 	style: vacantLandStyles,
 	onEachFeature: propertyActionsVacant
 	}).addTo(map);
-
-	// <b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >${feature.properties.Name}</b> <br/>
-	// 								${feature.properties.Garden_dev} Community Garden at ${feature.properties.Address}.<br/>
 
 //Add data on gardens
 var gardensGeojson = L.geoJSON(gardens, {
