@@ -4,26 +4,95 @@
 <head>
   <meta charset="utf-8">
   <title>NQ Capstone Project</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
+  <meta name="description" content="This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.">
+  <!-- bootstrap stylesheet-->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Leaflet stylesheet-->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
-
+  <!--icons-->
+  <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!--My stylesheet-->
   <link rel="stylesheet" href="css/styles.css">
-
+  <!--fonts-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500,700" rel="stylesheet">
-
 </head>
 
 <body>
-  <div id="my-map">
-      <!--Moved Pano Div within the popup for now
-      <div id="pano"></div>
-    -->
+  <div id="map-container">
+    <div id="my-map">
+
+    <!-- Side Pane -->
+        <div class="pane" id="pane-container">
+          <!-- Side Pane Main Content -->
+          <div class="pane-content" id="pane-content-container">
+            <h1>Vacant Land in The Bronx</h1>
+            <h1>CDs 1, 2 and 3</h1>
+            <hr>
+            <!-- Side Pane Tabs -->
+            <ul class="nav nav-tabs" id="paneTabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="property-tab" data-toggle="tab" href="#property" role="tab" aria-controls="property" aria-selected="true">Property Info</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data" aria-selected="false">Data Sources</a>
+            </li>
+            </ul>
+
+
+<!-- Move to on each js for populating the contents -->
+
+<!-- #tab-title-address = `<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
+        at ${feature.properties.Address}.<br/>`
+#tab-title-address = Community Garden at ${feature.properties.Address}.
+#title-owner = `<b style='font-size: 120%'>Owner:</b> ${feature.properties.OwnerName}.`
+#title-area = `<b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>`
+#title-FAR = `<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential; ${feature.properties.CommFAR} commercial; ${feature.properties.FacilFAR} facilities.<br/>` -->
+
+
+          <!-- Side Pane Tabs Content -->
+                 <div class="tab-content" id="paneTabsContent">
+                   <div class="tab-pane fade show active" id="property" role="tabpanel" aria-labelledby="property-tab">
+                     <div id="prop-info-container">
+                       <br>
+                       <span class="prop-title" id="lot-address"></span><br/>
+
+                       <div id="pano"></div><br>
+                       <span class="prop-info-title" id="lot-info"></span><br/>
+
+                     </div>
+                   </div>
+                   <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
+                     <br>
+                     <ul>
+                       <li><a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page#pluto">MapPLUTO 17v1.1, NYC Department of City Planning</a></li>
+                       <li><a href="https://livinglotsnyc.org/">Living Lots NYC, 596 Acres, Inc.</a></li>
+                       <li><a href="http://nosquedamos.org/">Property Portfolio, We Stay/Nos Quedamos Inc.</a></li>
+                     </ul>
+                   </div>
+                  <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+                    <p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</p>
+                    <p>The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
+                    <p>Mouse over an item to display information of the site.</p>
+                    </div>
+                 </div>
+               </div>
+
+        <!-- Side Pane Togggle Button -->
+         <div id="pane-toggle-button-container">
+           <button id="pane-toggle-button">
+             <i class="ion-chevron-left" id="pane-toggle-icon"></i>
+           </button>
+         </div>
+    </div>
+
+
       <div id="title-box">
         <!--LEGEND-->
         <div id="legend">
@@ -32,17 +101,11 @@
           <div class="legendItem cgarden">Community Garden</div>
           <div class="legendItem cds">Community Districts Boundary</div>
         </div>
-        <!--Title-->
-        <h1>Vacant Land in The Bronx</h1>
-        <h1>CDs 1, 2 and 3</h1>
-        <p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</p>
-        <p>The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
-        <p>Mouse over an item to display information of the site.</p>
         <!--<button class="fly-to-random">Fly to a random pizza shop!</button>-->
         <button class="zoomOut">Zoom Out</button>
       </div>
     </div>
-
+  </div>
 
 <!--Import Leaflet-->
 <script src="//unpkg.com/leaflet@1.3.1/dist/leaflet.js"
@@ -54,22 +117,21 @@ crossorigin=""></script>
 <script src='//npmcdn.com/@turf/turf/turf.min.js'></script>
 <!--Import Jquery-->
 <script
-src="//code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
+src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--Import google maps library
+API Key: AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY-->
+ <script async defer
+     src="//maps.googleapis.com/maps/api/js?key=AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY"></script>
+<!--Import Papa Parse-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.min.js" crossorigin=""></script>
 <!--Import Data-->
 <script src="data/cds123.js"></script>
 <script src="data/vacant_land.js"></script>
 <script src="data/gardens_.js"></script>
+<script src="js/side-pane.js"></script>
 <script src="js/scripts.js"></script>
-<!--Import google maps library
-API Key: AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY-->
- <script async defer
-     src="//maps.googleapis.com/maps/api/js?key=AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY"
-     ></script>
-<!--Import Papa Parse-->
-<script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.min.js"
-crossorigin=""></script>
+<script src="js/layer-amenities.js"></script>
 
 </body>
 </html>

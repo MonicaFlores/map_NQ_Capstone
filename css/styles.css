@@ -1,3 +1,69 @@
+/**************
+** Side Pane **
+**************/
+
+.pane {
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 408px;
+  background: #f1f1f1;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.pane-collapsed {
+  box-shadow: none;
+  transform: translateX(-408px);
+}
+
+.pane-content {
+  z-index: 10;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  padding: 10px 20px 10px 10px;
+}
+
+#pane-toggle-button-container {
+  position: absolute;
+  top: 8px;
+  left: 100%;
+}
+
+#pane-toggle-button {
+  z-index: -1;
+  width: 23px;
+  height: 48px;
+  cursor: pointer;
+  border-left: 1px solid #D4D4D4;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/*************
+** Panorama **
+**************/
+
+#pano {
+  width: 350px;
+  height: 150px;
+  position: relative;
+  z-index: 1000;
+}
+
+/*********
+** Map **
+*********/
+
+#map-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
 
 #my-map {
   position: absolute;
@@ -7,14 +73,9 @@
   left: 0;
 }
 
-#pano {
-  width: 350px;
-  height: 200px;
-  position: relative;
-  z-index: 1000;
-  top: 10px;
-  left: 10px;
-}
+/************
+**  Layers **
+*************/
 
 .leaflet-control-layers-expanded {
   /*content: "Key Stakeholders";*/
@@ -32,19 +93,32 @@
   font-weight: 400;
 }
 
-.leaflet-popup-content-wrapper {
+.circleMarker:hover{
+  border-style: dashed;
+  border-color: black;
+  border-width: 2px ;
+}
+
+/**********
+** Popup **
+***********/
+/* .leaflet-popup-content-wrapper {
     font-family: 'Roboto Condensed', monospace, sans-serif;
     font-size: 12px;
     border-color: black;
     border-width: 2px ;
-}
+} */
+
+/***********
+** Legend **
+************/
 
 #title-box {
-  width: 350px;
+  width: 200px;
   position: absolute;
   z-index: 1000;
   bottom: 10px;
-  left: 10px;
+  right: 10px;
   background: #FFF;
   padding: 15px;
   border-radius: 7px;
@@ -75,12 +149,11 @@
 }
 
 #legend:hover {
-    border-style: solid;
-    border-color: black;
-    border-width: 2px ;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px ;`
 }
 
-/*LEGEND*/
 .legendItem {
 }
 
@@ -98,6 +171,26 @@
   font-size: 10px;
 }
 
+.vacant::before {
+  background-color: #e80000;
+  border-color: black;
+}
+.cgarden::before {
+  background-color: #157a03;
+  border-color: black;
+}
+.cds::before {
+  background-color: white;
+  fill-Opacity: 0.1;
+  border-style: dashed;
+  border-color: black;
+  border-width: 1.5px ;
+
+}
+
+/**********
+** Texts **
+***********/
 body{
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 18px;
@@ -115,6 +208,10 @@ h3{
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
 }
+
+/************
+** Buttons **
+*************/
 button {
   outline: none;
   padding: 6px;
@@ -131,28 +228,9 @@ button:hover {
     border-width: 2px ;
 }
 
-
-
-.vacant::before {
-  background-color: #e80000;
-  border-color: black;
-}
-
-.cgarden::before {
-  background-color: #157a03;
-  border-color: black;
-}
-
-.cds::before {
-  background-color: white;
-  fill-Opacity: 0.1;
-  border-style: dashed;
-  border-color: black;
-  border-width: 1.5px ;
-
-}
-
-/*Links*/
+/************
+** Links **
+*************/
 /* unvisited link */
 a:link {
     color: black;
@@ -175,10 +253,3 @@ a:active {
     color: white;
     font-weight: 200;
     }
-
-
-.circleMarker:hover{
-  border-style: dashed;
-  border-color: black;
-  border-width: 2px ;
-}
