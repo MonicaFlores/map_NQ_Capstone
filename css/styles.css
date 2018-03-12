@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 408px;
+  width: 360px;
   /* background: #f1f1f1; */
   /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5); */
   border-radius: 7px;
@@ -22,7 +22,7 @@
 
 .pane-collapsed {
   box-shadow: none;
-  transform: translateX(-408px);
+  transform: translateX(-360px);
 }
 
 .pane-content {
@@ -131,44 +131,38 @@
 ************/
 
 #title-box {
-  width: 200px;
-  position: absolute;
+  position: fixed;
   z-index: 1000;
-  bottom: 10px;
-  right: 10px;
-  padding: 15px;
-  border-radius: 7px;
-  background: #FFF;
-  opacity: 0.8;
-  font-family: 'Roboto Condensed', sans-serif;
-  color:black;
-  border-radius:10px;
-  border-style: solid;
-  border-width: 2px ;
-  border-color: black;
-  text-align: left;
+  width: 340px;
+  height: 300px
+  left: 50%;
+  bottom: 1%;
+  margin-left: -10px;
 }
 
 #legend {
-  width:150px;
-  float: right;
+  width:200px;
+
+  z-index: 1000;
+  /* bottom: 10px; */
+  float: left;
+  left: 10px;
+  padding: 10px;
   background: #e6e6e6;
-  padding: 12px;
-  margin-left: 15px;
   font-family: 'Roboto Condensed', sans-serif;
   color:black;
   border-radius:10px;
-  border-style: dashed;
-  border-width: 2px ;
-  border-color: grey;
   text-align: left;
   font-size: 12px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px ;
 }
 
 #legend:hover {
-  border-style: solid;
-  border-color: black;
-  border-width: 2px ;`
+  border-style: dashed;
+  border-width: 2px ;
+  border-color: grey;
 }
 
 .legendItem {
@@ -205,6 +199,31 @@
 
 }
 
+/***********
+** Button **
+************/
+button {
+  outline: none;
+  padding: 6px;
+  bottom: 10px;
+  border-style: solid;
+  border-width: 1px ;
+  border-color: black;
+  background-color: white;
+  border-radius: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+button:hover {
+    border-style: dashed;
+    border-width: 2px ;
+}
+
+#zoomOut {
+  float:right;
+  position: fixed;
+}
+
 /**********
 ** Texts **
 ***********/
@@ -228,25 +247,6 @@ h3{
   font-size: 15px;
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
-}
-
-/************
-** Buttons **
-*************/
-button {
-  outline: none;
-  padding: 6px;
-  border-style: solid;
-  border-width: 1px ;
-  border-color: black;
-  background-color: white;
-  border-radius: 15px;
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
-button:hover {
-    border-style: dashed;
-    border-width: 2px ;
 }
 
 /************

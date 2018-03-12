@@ -27,11 +27,10 @@ const ClickHandler = (e) => {
 	const property = layer.feature.properties;
 	// Update Side Pane for clicked lot
 	expandSidePane();
-  // To DO: Handle polygon styles
+  // To DO: polygon styles
 	//
-  // get lot info
-	// populatePane(property, lotInfo);
-	// Fill in Property Info tab
+	// // Fill in Property Info tab
+	// populatePane();
 	$('#lot-address').empty();
 	$('#lot-address').append(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
 					at ${property.Address}.<br/>`);
@@ -50,13 +49,14 @@ const ClickHandler = (e) => {
 	// };
 	// setTimeout(function() {
 	// 	new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-	// }, 200)
+	// }, 100)
+
 	$('#lot-info').empty();
-	$('#lot-info').append(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
-					at ${property.Address}.<br/>
-			<b style='font-size: 120%'> //</b> <br/>
+	$('#lot-info').append(`
 			<b style='font-size: 120%'> Owner:</b> ${property.OwnerName}.<br/>
 			<b style='font-size: 120%'> Area:</b> ${numeral(property.LotArea).format('0,0')} sqft.<br/>
+			<b style='font-size: 120%'> Zoning:</b> ${property.ZoneDist1}.<br/>
+			<b style='font-size: 120%'> Overlay:</b> ${property.Overlay1}.<br/>
 			<b style='font-size: 120%'> FAR:</b>  ${property.ResidFAR} residential;
 						${property.CommFAR} commercial;
 						${property.FacilFAR} facilities.<br/>`);

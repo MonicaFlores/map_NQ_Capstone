@@ -22,32 +22,34 @@ const expandSidePane = () => {
 
 // Populate Side Pane with lot info.
 // const populatePane = (feature, lotInfo) => {
-//   // Fill in Property Info tab
-//   $('#lot-address').text(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
-//           at ${feature.properties.Address}.<br/>`);
+// // // Fill in Property Info tab
+// const layer = e.target;
+// const property = layer.feature.properties;
+// $('#lot-address').empty();
+// $('#lot-address').append(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
+//         at ${property.Address}.<br/>`);
 //
-//   // streetview
-//   $('#pano').empty();
+// // streetview
+// $('#pano').empty();
 //
-//   // Get panorama
-//   var centerFeature = turf.centerOfMass(e);
-//   var center = centerFeature.geometry.coordinates;
-//   var panoramaOptions = {
-//     position: {
-//       lat: center[1],
-//       lng: center[0],
-//     }
-//   };
-//   setTimeout(function() {
-//     new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
-//   }, 200)
+// // Get panorama
+// // var centerFeature = turf.centerOfMass(e);
+// // var center = centerFeature.geometry.coordinates;
+// // var panoramaOptions = {
+// // 	position: {
+// // 		lat: center[1],
+// // 		lng: center[0],
+// // 	}
+// // };
+// // setTimeout(function() {
+// // 	new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions)
+// // }, 100)
 //
-//   $('#lot-info').text(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
-//           at ${feature.properties.Address}.<br/>
-//       <b style='font-size: 120%'> //</b> <br/>
-//       <b style='font-size: 120%'> Owner:</b> ${feature.properties.OwnerName}.<br/>
-//       <b style='font-size: 120%'> Area:</b> ${numeral(feature.properties.LotArea).format('0,0')} sqft.<br/>
-//       <b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential;
-//             ${feature.properties.CommFAR} commercial;
-//             ${feature.properties.FacilFAR} facilities.<br/>`);
-// }
+// $('#lot-info').empty();
+// $('#lot-info').append(`
+//     <b style='font-size: 120%'> Owner:</b> ${property.OwnerName}.<br/>
+//     <b style='font-size: 120%'> Area:</b> ${numeral(property.LotArea).format('0,0')} sqft.<br/>
+//     <b style='font-size: 120%'> FAR:</b>  ${property.ResidFAR} residential;
+//           ${property.CommFAR} commercial;
+//           ${property.FacilFAR} facilities.<br/>`);
+//  }
