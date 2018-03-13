@@ -178,7 +178,11 @@ var gardensGeojson = L.geoJSON(gardens, {
 	onEachFeature: propertyActionsGarden
 	}).addTo(map);
 
-
-	$('.zoomOut').click(function() {
+//
+$('.zoomOut').click(function() {
   map.flyTo(defaultCenter, defaultZoom)
+});
+
+$('.resetPano').click(function() {
+	$('#pano').empty();
 });

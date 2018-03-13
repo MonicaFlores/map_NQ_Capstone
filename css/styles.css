@@ -3,7 +3,7 @@
 **************/
 
 .pane {
-  z-index: 1000;
+  z-index: 900;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5); */
   border-radius: 7px;
   background: #FFF;
-  /* opacity: 0.9; */
+  opacity: 0.9;
   border-color: black;
   border-width: 2px ;
   box-shadow: none;
@@ -68,6 +68,10 @@
   height: 160px;
   position: relative;
   z-index: 1000;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 10px;
+  border-width: 1px;
 }
 
 /*********
@@ -205,7 +209,6 @@
 button {
   outline: none;
   padding: 6px;
-  bottom: 10px;
   border-style: solid;
   border-width: 1px ;
   border-color: black;
@@ -222,6 +225,14 @@ button:hover {
 #zoomOut {
   float:right;
   position: fixed;
+  width: 70px;
+  bottom: 10px;
+}
+#resetPano {
+  float:right;
+  position: fixed;
+  width: 70px;
+  bottom: 50px;
 }
 
 /**********
@@ -233,7 +244,7 @@ button:hover {
 
 body{
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 18px;
+  font-size: 12px;
   text-align: center;
   color: black;
   /*font-weight: 200;*/

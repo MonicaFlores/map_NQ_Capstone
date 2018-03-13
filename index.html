@@ -23,8 +23,6 @@
 
 <body>
   <div id="map-container">
-    <div id="my-map">
-
     <!-- Side Pane -->
         <div class="pane" id="pane-container">
           <!-- Side Pane Main Content -->
@@ -45,56 +43,43 @@
             </li>
             </ul>
 
-
-<!-- Move to on each js for populating the contents -->
-
-<!-- #tab-title-address = `<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >Vacant Lot</b>
-        at ${feature.properties.Address}.<br/>`
-#tab-title-address = Community Garden at ${feature.properties.Address}.
-#title-owner = `<b style='font-size: 120%'>Owner:</b> ${feature.properties.OwnerName}.`
-#title-area = `<b style='font-size: 120%'> Area:</b> ${areasqft} sqft.<br/>`
-#title-FAR = `<b style='font-size: 120%'> FAR:</b>  ${feature.properties.ResidFAR} residential; ${feature.properties.CommFAR} commercial; ${feature.properties.FacilFAR} facilities.<br/>` -->
-
-
           <!-- Side Pane Tabs Content -->
-                 <div class="tab-content" id="paneTabsContent">
-                   <div class="tab-pane fade show active" id="property" role="tabpanel" aria-labelledby="property-tab">
-                     <div id="prop-info-container">
-                       <br>
-                       <span class="prop-title" id="lot-address"></span><br/>
-
-                       <div id="pano"></div><br>
-                       <span class="prop-info-title" id="lot-info"></span><br/>
-
-                     </div>
-                   </div>
-                   <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
-                     <br>
-                     <ul>
-                       <li><a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page#pluto">MapPLUTO 17v1.1, NYC Department of City Planning</a></li>
-                       <li><a href="https://livinglotsnyc.org/">Living Lots NYC, 596 Acres, Inc.</a></li>
-                       <li><a href="http://nosquedamos.org/">Property Portfolio, We Stay/Nos Quedamos Inc.</a></li>
-                     </ul>
-                   </div>
-                  <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
-                    <br/><p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</p>
-                    <p>The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
-                    <p>Mouse over an item to display information of the site.</p>
-                    </div>
-                 </div>
-                 <!--LEGEND-->
-                 <hr>
-
-                 <div id="title-box">
-                   <div id="legend">
-                     <h3>Legend:</h3>
-                     <div class="legendItem vacant">Vacant Land</div>
-                     <div class="legendItem cgarden">Community Garden</div>
-                     <div class="legendItem cds">Community Districts Boundary</div>
-                   </div>
-                   <button class="zoomOut" id="zoomOut">Zoom Out</button><br/>
-                 </div>
+          <div class="tab-content" id="paneTabsContent">
+            <div class="tab-pane fade show active" id="property" role="tabpanel" aria-labelledby="property-tab">
+               <div id="prop-info-container">
+                 <br>
+                 <span class="prop-title" id="lot-address">Click a property to find out more.<br/></span><br/>
+                 <div id="pano"></div><br>
+                 <span class="prop-info-title" id="lot-info"></span><br/>
                </div>
+            </div>
+            <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
+               <br>
+               <ul>
+                 <li><a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page#pluto">MapPLUTO 17v1.1, NYC Department of City Planning</a></li>
+                 <li><a href="https://livinglotsnyc.org/">Living Lots NYC, 596 Acres, Inc.</a></li>
+                 <li><a href="http://nosquedamos.org/">Property Portfolio, We Stay/Nos Quedamos Inc.</a></li>
+               </ul>
+            </div>
+            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+              <br/><p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</p>
+              <p>The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
+              <p>Mouse over an item to display information of the site.</p>
+            </div>
+          </div>
+          <!--LEGEND-->
+          <hr>
+          <div id="title-box">
+           <div id="legend">
+             <h3>Legend:</h3>
+             <div class="legendItem vacant">Vacant Land</div>
+             <div class="legendItem cgarden">Community Garden</div>
+             <div class="legendItem cds">Community Districts Boundary</div>
+           </div>
+           <button class="zoomOut" id="zoomOut">Zoom Out</button><br/>
+           <button class="resetPano" id="resetPano">Reset Panorama</button><br/>
+          </div>
+         </div>
         <!-- Side Pane Togggle Button -->
          <div id="pane-toggle-button-container">
            <button id="pane-toggle-button">
@@ -102,7 +87,7 @@
            </button>
          </div>
        </div>
-    </div>
+    <div id="my-map"></div>
   </div>
 
 <!--Import Leaflet-->
