@@ -54,7 +54,7 @@ const getLotInfo = (property) => {
 
 //Get Panorama
 const getPano = (layer) => {
-	const centerFeature = turf.centerOfMass(layer);
+	const centerFeature = turf.centerOfMass(layer.feature);
 	const center = centerFeature.geometry.coordinates;
 	const panoramaOptions = {
 		position: {
@@ -96,7 +96,7 @@ const ClickHandlerGarden = (e) => {
 	getGardenTitle(property)
 	// Panorama
 	$('#pano').empty();
-	// getPano(layer)
+	getPano(layer)
 	$('#lot-info').empty();
 	getLotInfo(property)
 };
