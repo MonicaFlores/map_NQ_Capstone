@@ -28,28 +28,49 @@ getPlaces((places) => {
 		} else if (type == 'Educational') {
 			 	educationalArray.push(
 						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
-
 		} else  {
 				culturalArray.push(
 						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
 		}
   });
 
-	//Create layer with amenities
-	var partners  = L.layerGroup(partnersArray)
-	var educational  = L.layerGroup(educationalArray)
-	var cultural  = L.layerGroup(culturalArray)
+//Create layer with amenities
+var partners  = L.layerGroup(partnersArray)
+var educational  = L.layerGroup(educationalArray)
+var cultural  = L.layerGroup(culturalArray)
 
-	var amenitiesLayer = {
-//attempt to create sub-layers by amenities-type
-			"NQ Partners": partners,
-			"Educational Institutions": educational,
-			"Cultural Institutions": cultural,
-	};
+var amenitiesLayer = {
+		"NQ Partners": partners,
+		"Educational Institutions": educational,
+		"Cultural Institutions": cultural,
+};
 
-	//L.control.layers({}, amenitiesLayer).addTo(map);
-L.control.layers(null, amenitiesLayer, {collapsed:false, position: 'topright'}).addTo(map);
+//Create layers for main vizualization
+
+var lotsArray = [landGeojson, gardensGeojson]
+var lots = L.layerGroup(lotsArray)
+
+// var zoningArray = [landZo, gardenZo]
+// var zoning = L.layerGroup(zoningArray)
+
+var farArrayGar = [gardenFar]
+var airRightsGar = L.layerGroup(farArrayGar)
+
+var farArrayVac = [landFar]
+var airRightsVac = L.layerGroup(farArrayVac)
+
+var mainVizLayer = {
+    "Vacant/Garden": lots,
+    "Residential Air Rights-Gardens": airRightsGar,
+    "Residential Air Rights-Vacant Lots": airRightsVac,
+    // "Zoning": zoning,
+};
+
+// L.control.layers(null, amenitiesLayer, {collapsed:false, position: 'topright'}).addTo(map);
+// });
+L.control.layers(mainVizLayer, amenitiesLayer, {collapsed:false, position: 'topright'}).addTo(map);
 });
+
 
 //Add amenities dataset
 function getPlaces(callback) {

@@ -73,6 +73,10 @@
   border-radius: 10px;
   border-width: 1px;
 }
+/*
+#canvas {
+  height: 300px;
+} */
 
 /*********
 ** Map **
@@ -144,7 +148,7 @@
   margin-left: -10px;
 }
 
-#legend {
+.legend {
   width:200px;
 
   z-index: 1000;
@@ -200,7 +204,56 @@
   border-style: dashed;
   border-color: black;
   border-width: 1.5px ;
-
+}
+/* Air rights Garden legend */
+.Gard0::before {
+  background-color: #FFF;
+  border-color: black;
+}
+.Gard1::before {
+  background-color: #ffffcc;
+  border-color: black;
+}
+.Gard2::before {
+  background-color: #c2e699;
+  border-color: black;
+}
+.Gard3::before {
+  background-color: #78c679;
+  border-color: black;
+}
+.Gard4::before {
+  background-color: #31a354;
+  border-color: black;
+}
+.Gard5::before {
+  background-color: #006837;
+  border-color: black;
+}
+/* Air rights Vacant lots legend */
+.Vacant0::before {
+  background-color: #FFF;
+  border-color: black;
+}
+.Vacant1::before {
+  background-color: #fef0d9;
+  border-color: black;
+}
+.Vacant2::before {
+  background-color: #fdcc8a;
+  border-color: black;
+}
+.Vacant3::before {
+  background-color: #fc8d59;
+  border-color: black;
+}
+.Vacant4::before {
+  background-color: #e34a33;
+  border-color: black;
+}
+.Vacant5::before {
+  background-color: #b30000;
+  border-color: black;
 }
 
 /***********

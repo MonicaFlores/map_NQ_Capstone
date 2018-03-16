@@ -35,6 +35,9 @@
             <li class="nav-item">
               <a class="nav-link active" id="property-tab" data-toggle="tab" href="#property" role="tab" aria-controls="property" aria-selected="true">Property Info</a>
             </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" id="stats-tab" data-toggle="tab" href="#stats" role="tab" aria-controls="stats" aria-selected="false">Stats</a>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
             </li>
@@ -53,6 +56,39 @@
                  <span class="prop-info-title" id="lot-info"></span><br/>
                </div>
             </div>
+
+            <!-- <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+               <br>
+               <h3>Total Air Rights</h3>
+               <div class="chart-container" style="position: relative; height:200vh">
+               <canvas id="myChart"></canvas>
+               </div>
+               <p>Total Air Rights correspond to developable squarefootage allowed "as of right". It is calculated by multiplying each site's lot area by its FAR.
+                 The agregated value is simply a sum of all individual site Air Rights by zoning category.</p>
+            </div> -->
+
+            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+              <br/>
+              <!-- TO DO: Move map info to modal -->
+              <h3>The Map</h3>
+              <p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</br>
+              The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
+              <!-- About should start here -->
+              <h3>The Project</h3>
+              <p>We Stay/Nos Quedamos (NQ) is a non-profit organization located in the South Bronx. NQ is pursuing the establishment of a Community Land Trust (CLT):
+                a non-profit, tax-exempt corporation that will own and steward land for the public good.
+                The South Bronx Community Land Trust (SBxCLT) aims to address a lack of affordable housing in the South Bronx, and create a more
+                equitable community in the area.</p>
+              <h3>The NYU Capstone Team</h3>
+              <p> This NYU Capstone team was tasked to aid in the establishment of the SBxCLT through an implementation plan.
+                Our work included: Existing Conditions and Data Analysis; Case Study and Technical Aspects Research; a SWOT analysis of the current situation;
+                and a set of recommendations for succesfuly establishing a CLT in the South Bronx.
+                The content of this map reflects the data collection work of our Capstone team.</p>
+              <h3>Team Members</h3>
+              <p>Joyce Choi Li // Monica Flores // Yixin Li // Karlo Ludwig // Stephan Petryzca.</p>
+              <p>(c) Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
+            </div>
+
             <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
                <br>
                <ul>
@@ -61,37 +97,41 @@
                  <li><a href="http://nosquedamos.org/">Property Portfolio, We Stay/Nos Quedamos Inc.</a></li>
                </ul>
             </div>
-            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
-              <br/>
-              <h3>The Map</h3>
-              <p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</br>
-              The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
-              <h3>The Project</h3>
-              <p>We Stay/Nos Quedamos (NQ) is a non-profit organization located in the South Bronx. NQ is pursuing the establishment of a community land trust (CLT):
-                a non-profit, tax-exempt corporation that will own and steward land for the public good.
-                The South Bronx Community Land Trust (SBxCLT) aims to address a lack of affordable housing in the South Bronx, and create a more
-                equitable community in the area.</p>
-              <h3>The NYU Capstone Team</h3>
-              <p> This NYU Capstone team was tasked to aid in the establishment of the SBxCLT through an implementation plan that consists of three different pillars,
-                1) Existing Conditions and Data Analysis (the content of this map), which focused on looking at current conditions in the study area,
-                including publicly owned vacant lots, community gardens within public land and a potential area for a special district that will allow for air right transfers,
-                2) Case Study and Technical Aspects Research, which focused on providing qualitative research findings on CLT legal frameworks, organizational strategies,
-                and fundraising models that NQ could utilize to inform their initial operations and overall sustainability plan,
-                and 3) a Community Needs Assessment model based on additional research into local community partners,
-                existing data from other NQ partners, and overall goals of the current stakeholder grouping.</p>
-              <h3>Team Members</h3>
-              <p>Joyce Choi Li // Monica Flores // Yixin Li // Karlo Ludwig // Stephan Petryzca.</p>
-              <p>(c) Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
-            </div>
+
           </div>
-          <!--LEGEND-->
+          <!--LEGENDs-->
           <hr>
           <div id="title-box">
-           <div id="legend">
+           <!--Default Legend-->
+           <div id="legendLots" class="legend">
              <h3>Legend:</h3>
              <div class="legendItem vacant">Vacant Land</div>
              <div class="legendItem cgarden">Community Garden</div>
              <div class="legendItem cds">Community Districts Boundary</div>
+           </div>
+           <!--Garden Air Rights Legend-->
+           <div id="legendFarGard" class="legend" style='display: none' >
+             <h3>Legend</h3>
+             <h3>Residential Air Rights (sqft):</h3>
+             <div class="legendItem Gard0">0</div>
+             <div class="legendItem Gard1">Up to 5,000</div>
+             <div class="legendItem Gard2">5,001 - 10,000</div>
+             <div class="legendItem Gard3">10,001 - 15000</div>
+             <div class="legendItem Gard4">15,001 - 20000</div>
+             <div class="legendItem Gard5">More than 20,000</div>
+           </div>
+           <!--Vacant Lots Air Rights Legend-->
+           <div id="legendFarLand" class="legend" style='display: none' >
+             <h3>Legend</h3>
+             <h3>Residential Air Rights (sqft):</h3>
+             <div class="legendItem Vacant0">0</div>
+             <div class="legendItem Vacant1">Up to 5,000</div>
+             <div class="legendItem Vacant2">5,001 - 10,000</div>
+             <div class="legendItem Vacant3">10,001 - 20000</div>
+             <div class="legendItem Vacant4">20,001 - 50000</div>
+             <div class="legendItem Vacant5">More than 50,000</div><br/>
+             <p style=font-size: 8px"">Total Air Rights correspond to developable squarefootage allowed "as of right". It is calculated by multiplying each site's lot area by its FAR.
+               The agregated value is simply a sum of all individual site Air Rights by zoning category.</p>
            </div>
            <button class="zoomOut" id="zoomOut">Zoom Out</button><br/>
            <button class="resetPano" id="resetPano">Reset Panorama</button><br/>
@@ -125,11 +165,14 @@ API Key: AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY-->
      src="//maps.googleapis.com/maps/api/js?key=AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY"></script>
 <!--Import Papa Parse-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.min.js" crossorigin=""></script>
+<!--Import charts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!--Import Data-->
 <script src="data/cds123.js"></script>
 <script src="data/vacant_land.js"></script>
 <script src="data/gardens_.js"></script>
 <script src="js/side-pane.js"></script>
+<script src="js/graph.js"></script>
 <script src="js/scripts.js"></script>
 <script src="js/layer-amenities.js"></script>
 

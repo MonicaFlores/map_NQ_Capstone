@@ -1,7 +1,11 @@
-var defaultCenter = [40.818,-73.92];
-var defaultZoom = 13.5;
+const mapOptions = {
+  zoomControl: false,
+  zoom: 13.5,
+  center: [40.818,-73.915],
+  // maxBounds: [[40.64417, -73.93005], [40.70014, -73.84718]]
+}
 
-var map = L.map('my-map').setView(defaultCenter, defaultZoom);
+var map = L.map('my-map', mapOptions);
 
 var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -10,6 +14,10 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 	maxZoom: 17,
 }).addTo(map);
 
+// Add zoom-control
+L.control.zoom({position:'bottomright'}).addTo(map);
+
+
 //Add Community district boundaries
 var CDsGeojson = L.geoJSON(CDs,{
   style: function(feature) {
@@ -17,7 +25,7 @@ var CDsGeojson = L.geoJSON(CDs,{
           dashArray: '3 6',
           color: '#595959',
           fillColor: 'white',
-          fillOpacity: 0.25,
+          fillOpacity: 0.5,
           weight: 1.5,}
     }}).addTo(map);
 
@@ -178,7 +186,92 @@ var gardensGeojson = L.geoJSON(gardens, {
 	onEachFeature: propertyActionsGarden
 	}).addTo(map);
 
-//
+//FAR visualization
+// get colors by ammount of Residential Air Rights
+function getFarColorGard(d) {
+		return d > 20000  ? '#006837' :
+					 d > 15000  ? '#31a354' :
+					 d > 10000  ? '#78c679' :
+					 d > 5000   ? '#c2e699' :
+					 d > 1   ? '#ffffcc' :
+											'#FFF';
+}
+
+function getFarColorVac(d) {
+		return d > 50000  ? '#b30000' :
+					 d > 20000  ? '#e34a33' :
+					 d > 10000  ? '#fc8d59' :
+					 d > 5000   ? '#fdcc8a' :
+					 d > 1   ? '#fef0d9' :
+											'#FFF';
+}
+
+const gardenFarStyles = (feature) => {
+	const airRights = (feature.properties.ResidFAR * feature.properties.LotArea)
+	return {
+			// fillColor: getFarColorGard(${numeral(feature.properties.ResidFAR * feature.properties.LotArea).format('0,0')}),
+			fillColor: getFarColorGard(airRights),
+			weight: 1,
+			color: '#595959',
+			fillOpacity: 0.9,
+		};
+	};
+
+const landFarStyles = (feature) => {
+	const airRights = (feature.properties.ResidFAR * feature.properties.LotArea)
+	return {
+			fillColor: getFarColorVac(airRights),
+			weight: 1,
+			color: '#595959',
+			fillOpacity: 0.9,
+		};
+	};
+
+	const mouseOutResetVacantFar = (e) => {
+	  const layer = e.target;
+		layer.closePopup();
+		landFar.resetStyle(layer);
+	};
+
+	const mouseOutResetGardenFar = (e) => {
+	  const layer = e.target;
+		layer.closePopup();
+		gardenFar.resetStyle(layer);
+	};
+
+	const propertyActionsVacantFar = (feature, layer) => {
+	  layer.on({
+	    'click': ClickHandlerVacant,
+	    'mouseover': mouseOverFeature,
+	    'mouseout': mouseOutResetVacantFar
+		  });
+		};
+
+	const propertyActionsGardenFar = (feature, layer) => {
+	  layer.on({
+	    'click': ClickHandlerGarden,
+	    'mouseover': mouseOverFeature,
+	    'mouseout': mouseOutResetGardenFar
+		  });
+		};
+
+//Call data with style defined above
+var landFar = L.geoJSON(land, {
+	style: landFarStyles,
+	onEachFeature: propertyActionsVacantFar
+	})
+	//.addTo(map);
+
+var gardenFar = L.geoJSON(gardens, {
+	style: gardenFarStyles,
+	onEachFeature: propertyActionsGardenFar
+	})
+	//.addTo(map);
+
+
+var defaultCenter = [40.818,-73.92];
+var defaultZoom = 13.5;
+
 $('.zoomOut').click(function() {
   map.flyTo(defaultCenter, defaultZoom)
 });
