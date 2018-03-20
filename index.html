@@ -103,14 +103,14 @@
           <hr>
           <div id="title-box">
            <!--Default Legend-->
-           <div id="legendLots" class="legend">
+           <div id="lotsArray-legend" class="legend">
              <h3>Legend:</h3>
              <div class="legendItem vacant">Vacant Land</div>
              <div class="legendItem cgarden">Community Garden</div>
              <div class="legendItem cds">Community Districts Boundary</div>
            </div>
            <!--Garden Air Rights Legend-->
-           <div id="legendFarGard" class="legend" style='display: none' >
+           <div id="gardenFar-legend" class="legend" >
              <h3>Legend</h3>
              <h3>Residential Air Rights (sqft):</h3>
              <div class="legendItem Gard0">0</div>
@@ -120,8 +120,9 @@
              <div class="legendItem Gard4">15,001 - 20000</div>
              <div class="legendItem Gard5">More than 20,000</div>
            </div>
+
            <!--Vacant Lots Air Rights Legend-->
-           <div id="legendFarLand" class="legend" style='display: none' >
+           <div id="landFar-legend" class="legend" >
              <h3>Legend</h3>
              <h3>Residential Air Rights (sqft):</h3>
              <div class="legendItem Vacant0">0</div>
@@ -165,14 +166,11 @@ API Key: AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY-->
      src="//maps.googleapis.com/maps/api/js?key=AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY"></script>
 <!--Import Papa Parse-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.min.js" crossorigin=""></script>
-<!--Import charts-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!--Import Data-->
 <script src="data/cds123.js"></script>
 <script src="data/vacant_land.js"></script>
 <script src="data/gardens_.js"></script>
 <script src="js/side-pane.js"></script>
-<script src="js/graph.js"></script>
 <script src="js/scripts.js"></script>
 <script src="js/layer-amenities.js"></script>
 

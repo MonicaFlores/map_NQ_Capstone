@@ -72,6 +72,27 @@ L.control.layers(mainVizLayer, amenitiesLayer, {collapsed:false, position: 'topr
 });
 
 
+// add event listeners for overlayadd and overlayremove
+map.on('overlayadd', handleLayerToggle);
+map.on('overlayremove', handleLayerToggle);
+
+function handleLayerToggle(eventLayer) {
+// get the name of the layergroup, and whether it is being added or removed
+var type = eventLayer.type;
+var name = eventLayer.name;
+
+// if being added, show the corresponding legend
+// else, hide it.
+if (eventLayer.type === 'overlayadd') {
+  $('#' + name + '-legend').show();
+} else {
+  $('#' + name + '-legend').hide();
+}
+}
+
+
+
+
 //Add amenities dataset
 function getPlaces(callback) {
   $.ajax({
