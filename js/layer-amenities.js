@@ -94,7 +94,7 @@ L.control.layers(mainVizLayer, amenitiesLayer, {collapsed:false, position: 'topr
 //
 // lotsArray-legend gardenFar-legend landFar-legend
 
-map.on('overlayadd', function(eo) {
+map.on('baselayerchange', function(eo) {
 if (eo.name === 'gardenFar') {
     $('#gardenFar-legend').show;
     $('#lotsArray-legend').hide;
@@ -104,7 +104,7 @@ if (eo.name === 'gardenFar') {
 }
 });
 
-map.on('overlayadd', function(eo) {
+map.on('baselayerchange', function(eo) {
 if (eo.name === 'landFar') {
     $('#landFar-legend').show;
     $('#lotsArray-legend').hide;
@@ -114,7 +114,7 @@ if (eo.name === 'landFar') {
 }
 });
 
-map.on('overlayadd', function(eo) {
+map.on('baselayerchange', function(eo) {
 if (eo.name === 'lotsArray') {
     $('#lotsArray-legend').show;
     $('#landFar-legend').hide;
