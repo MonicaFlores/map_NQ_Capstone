@@ -73,56 +73,56 @@ L.control.layers(mainVizLayer, amenitiesLayer, {collapsed:false, position: 'topr
 });
 
 
-// // add event listeners for overlayadd and overlayremove
-// map.on('overlayadd', handleLayerToggle);
+// add event listeners for overlayadd and overlayremove
+map.on('baselayerchange', handleLayerToggle);
 // map.on('overlayremove', handleLayerToggle);
-//
-// function handleLayerToggle(eventLayer) {
-// // get the name of the layergroup, and whether it is being added or removed
-// var type = eventLayer.type;
-// var name = eventLayer.name;
-//
-// // if being added, show the corresponding legend
-// // else, hide it.
-// if (eventLayer.type === 'overlayadd') {
-//   $('#' + name + '-legend').show();
-// } else {
-//   $('#' + name + '-legend').hide();
-// }
-// }
+
+function handleLayerToggle(eventLayer) {
+// get the name of the layergroup, and whether it is being added or removed
+var type = eventLayer.type;
+var name = eventLayer.name;
+
+// if being added, show the corresponding legend
+// else, hide it.
+if (eventLayer.type === 'baselayerchange') {
+  $('#' + name + '-legend').show();
+} else {
+  $('#' + name + '-legend').hide();
+}
+}
 // lotsArray gardenFar landFar
 //
 // lotsArray-legend gardenFar-legend landFar-legend
 
-map.on('baselayerchange', function(eo) {
-if (eo.name === 'gardenFar') {
-    $('#gardenFar-legend').show;
-    $('#lotsArray-legend').hide;
-    $('#landFar-legend').hide;
-} else {
-    $('#gardenFar-legend').hide;
-}
-});
-
-map.on('baselayerchange', function(eo) {
-if (eo.name === 'landFar') {
-    $('#landFar-legend').show;
-    $('#lotsArray-legend').hide;
-    $('#gardenFar-legend').hide;
-} else {
-    $('#landFar-legend').hide;
-}
-});
-
-map.on('baselayerchange', function(eo) {
-if (eo.name === 'lotsArray') {
-    $('#lotsArray-legend').show;
-    $('#landFar-legend').hide;
-    $('#gardenFar-legend').hide;
-} else {
-    $('#lotsArray-legend').hide;
-}
-});
+// map.on('baselayerchange', function(eo) {
+// if (eo.name === 'gardenFar') {
+//     $('#gardenFar-legend').show;
+//     $('#lotsArray-legend').hide;
+//     $('#landFar-legend').hide;
+// } else {
+//     $('#gardenFar-legend').hide;
+// }
+// });
+//
+// map.on('baselayerchange', function(eo) {
+// if (eo.name === 'landFar') {
+//     $('#landFar-legend').show;
+//     $('#lotsArray-legend').hide;
+//     $('#gardenFar-legend').hide;
+// } else {
+//     $('#landFar-legend').hide;
+// }
+// });
+//
+// map.on('baselayerchange', function(eo) {
+// if (eo.name === 'lotsArray') {
+//     $('#lotsArray-legend').show;
+//     $('#landFar-legend').hide;
+//     $('#gardenFar-legend').hide;
+// } else {
+//     $('#lotsArray-legend').hide;
+// }
+// });
 
 
 //Add amenities dataset
