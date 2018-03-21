@@ -1,16 +1,15 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>NQ Capstone Project</title>
+  <title>NQ Capstone Map</title>
   <meta name="description" content="This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.">
   <!-- bootstrap stylesheet-->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Leaflet stylesheet-->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
   <!--icons-->
   <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!--My stylesheet-->
@@ -33,9 +32,8 @@
           </button>
         </div>
         <div class="modal-body">
-          <h3>Welcome to the NQ Capstone Map</h3>
-          <p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3.</br>
-          The information was gathered in the Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
+          <h3>Welcome to the NQ Capstone Map</h3></br>
+          <p>This map shows the location of publicly owned vacant lots and community gardens in the South Bronx Community Districts 1, 2 and 3. The information was gathered for the non-profit community organization We Stay/Nos Quedamos (NQ) in the Nos Quedamos - NYU Wagner Capstone Project, 2017-2018.</p>
           Click on a property to display information about it on the side pane.</br>
           Click on the top-right panel to change or add layers.
         </div>
@@ -43,16 +41,16 @@
     </div>
   </div>
 
-<div id="map-container">
-  <!-- Side Pane -->
-      <div class="pane" id="pane-container">
-        <!-- Side Pane Main Content -->
-        <div class="pane-content" id="pane-content-container">
-          <h1>Vacant Land in The Bronx</h1>
-          <h1>CDs 1, 2 and 3</h1>
-          <hr>
-          <!-- Side Pane Tabs -->
-          <ul class="nav nav-tabs" id="paneTabs" role="tablist">
+  <div id="map-container">
+    <!-- Side Pane -->
+    <div class="pane" id="pane-container">
+      <!-- Side Pane Main Content -->
+      <div class="pane-content" id="pane-content-container">
+        <h1>Vacant Land and Community Gardens in The Bronx</h1>
+        <h1>CDs 1, 2 and 3</h1>
+        <hr>
+        <!-- Side Pane Tabs -->
+        <ul class="nav nav-tabs" id="paneTabs" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="property-tab" data-toggle="tab" href="#property" role="tab" aria-controls="property" aria-selected="true">Property Info</a>
           </li>
@@ -65,120 +63,107 @@
           <li class="nav-item">
             <a class="nav-link" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data" aria-selected="false">Data Sources</a>
           </li>
-          </ul>
+        </ul>
 
         <!-- Side Pane Tabs Content -->
         <div class="tab-content" id="paneTabsContent">
           <div class="tab-pane fade show active" id="property" role="tabpanel" aria-labelledby="property-tab">
-             <div id="prop-info-container">
-               <br>
-               <span class="prop-title" id="lot-address">Click over an item to display information of the site.<br/></span><br/>
-               <div id="pano"></div><br>
-               <span class="prop-info-title" id="lot-info"></span><br/>
-             </div>
+            <div id="prop-info-container">
+              <br>
+              <span class="prop-title" id="lot-address">Click on an item to display information of the site.<br/></span><br/>
+              <div id="pano"></div><br>
+              <span class="prop-info-title" id="lot-info"></span><br/>
+            </div>
           </div>
 
           <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
             <br/>
             <h3>The Project</h3>
-            <p>We Stay/Nos Quedamos (NQ) is a non-profit organization located in the South Bronx. NQ is pursuing the establishment of a Community Land Trust (CLT):
-              a non-profit, tax-exempt corporation that will own and steward land for the public good.
-              The South Bronx Community Land Trust (SBxCLT) aims to address a lack of affordable housing in the South Bronx, and create a more
-              equitable community in the area.</p>
+            <p>We Stay/Nos Quedamos (NQ) is a non-profit organization located in the South Bronx. NQ is pursuing the establishment of a Community Land Trust (CLT): a non-profit, tax-exempt corporation that will own and steward land for the public good. The
+              South Bronx Community Land Trust (SBxCLT) aims to address a lack of affordable housing in the South Bronx, and create a more equitable community in the area.</p>
             <h3>The NYU Capstone Team</h3>
-            <p> This NYU Capstone team was tasked to aid in the establishment of the SBxCLT through an implementation plan.
-              Our work included: Existing Conditions and Data Analysis; Case Study and Technical Aspects Research; a SWOT analysis of the current situation;
-              and a set of recommendations for succesfuly establishing a CLT in the South Bronx.
-              The content of this map reflects the data collection work of our Capstone team.</p>
+            <p> This NYU Capstone team was tasked to aid in the establishment of the SBxCLT through an implementation plan. Our work included: Existing Conditions and Data Analysis; Case Study and Technical Aspects Research; a SWOT analysis of the current
+              situation; and a set of recommendations for succesfuly establishing a CLT in the South Bronx. The content of this map reflects the data collection work of our Capstone team.</p>
             <h3>Team Members</h3>
             <p>Joyce Choi Li // Monica Flores // Yixin Li // Karlo Ludwig // Stephan Petryzca.</p>
             <p>© Nos Quedamos - NYU Capstone Project, 2017-2018.</p>
           </div>
 
           <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
-             <br>
-             <ul>
-               <li><a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page#pluto">MapPLUTO 17v1.1, NYC Department of City Planning</a></li>
-               <li><a href="https://livinglotsnyc.org/">Living Lots NYC, 596 Acres, Inc.</a></li>
-               <li><a href="http://nosquedamos.org/">Property Portfolio, We Stay/Nos Quedamos Inc.</a></li>
-             </ul>
+            <br>
+            <ul>
+              <li><a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page#pluto">MapPLUTO 17v1.1, NYC Department of City Planning</a></li>
+              <li><a href="https://livinglotsnyc.org/">Living Lots NYC, 596 Acres, Inc.</a></li>
+              <li><a href="http://nosquedamos.org/">Property Portfolio, We Stay/Nos Quedamos Inc.</a></li>
+            </ul>
           </div>
 
         </div>
         <!--LEGENDs-->
         <hr>
         <div id="title-box">
-         <!--Default Legend-->
-         <div id="lots-legend" class="legend">
-           <h3>Legend:</h3>
-           <div class="legendItem vacant">Vacant Land</div>
-           <div class="legendItem cgarden">Community Garden</div>
-           <div class="legendItem cds">Community Districts Boundary</div>
-         </div>
-         <!--Garden Air Rights Legend-->
-         <div id="gardenFar-legend" class="legend" style="display: none" >
-           <h3>Community Gardens</h3>
-           <h3>Residential Air Rights (sqft):</h3>
-           <div class="legendItem Gard0">0</div>
-           <div class="legendItem Gard1">Up to 5,000</div>
-           <div class="legendItem Gard2">5,001 - 10,000</div>
-           <div class="legendItem Gard3">10,001 - 15000</div>
-           <div class="legendItem Gard4">15,001 - 20000</div>
-           <div class="legendItem Gard5">More than 20,000</div>
-         </div>
+          <!--Default Legend-->
+          <div id="lots-legend" class="legend">
+            <h3>Legend:</h3>
+            <div class="legendItem vacant">Vacant Land</div>
+            <div class="legendItem cgarden">Community Garden</div>
+            <div class="legendItem cds">Community Districts Boundary</div>
+          </div>
+          <!--Garden Air Rights Legend-->
+          <div id="gardenFar-legend" class="legend" style="display: none">
+            <h3>Community Gardens</h3>
+            <h3>Residential Air Rights (sqft):</h3>
+            <div class="legendItem Gard0">0</div>
+            <div class="legendItem Gard1">Up to 5,000</div>
+            <div class="legendItem Gard2">5,001 - 10,000</div>
+            <div class="legendItem Gard3">10,001 - 15000</div>
+            <div class="legendItem Gard4">15,001 - 20000</div>
+            <div class="legendItem Gard5">More than 20,000</div>
+          </div>
 
-         <!--Vacant Lots Air Rights Legend-->
-         <div id="landFar-legend" class="legend" style="display: none">
-           <h3>Vacant Lots</h3>
-           <h3>Residential Air Rights (sqft):</h3>
-           <div class="legendItem Vacant0">0</div>
-           <div class="legendItem Vacant1">Up to 5,000</div>
-           <div class="legendItem Vacant2">5,001 - 10,000</div>
-           <div class="legendItem Vacant3">10,001 - 20000</div>
-           <div class="legendItem Vacant4">20,001 - 50000</div>
-           <div class="legendItem Vacant5">More than 50,000</div>
-           <!-- <p style=font-size: 8px"">Total Air Rights correspond to developable squarefootage allowed "as of right". It is calculated by multiplying each site's lot area by its FAR.
+          <!--Vacant Lots Air Rights Legend-->
+          <div id="landFar-legend" class="legend" style="display: none">
+            <h3>Vacant Lots</h3>
+            <h3>Residential Air Rights (sqft):</h3>
+            <div class="legendItem Vacant0">0</div>
+            <div class="legendItem Vacant1">Up to 5,000</div>
+            <div class="legendItem Vacant2">5,001 - 10,000</div>
+            <div class="legendItem Vacant3">10,001 - 20000</div>
+            <div class="legendItem Vacant4">20,001 - 50000</div>
+            <div class="legendItem Vacant5">More than 50,000</div>
+            <!-- <p style=font-size: 8px"">Total Air Rights correspond to developable squarefootage allowed "as of right". It is calculated by multiplying each site's lot area by its FAR.
              The agregated value is simply a sum of all individual site Air Rights by zoning category.</p> -->
-         </div>
-         <button class="zoomOut" id="zoomOut">Zoom Out</button><br/>
-         <button class="resetPano" id="resetPano">Reset Panorama</button><br/>
+          </div>
+          <button class="zoomOut" id="zoomOut">Zoom Out</button><br/>
+          <button class="resetPano" id="resetPano">Reset Panorama</button><br/>
         </div>
-       </div>
+      </div>
       <!-- Side Pane Togggle Button -->
-       <div id="pane-toggle-button-container">
-         <button id="pane-toggle-button">
+      <div id="pane-toggle-button-container">
+        <button id="pane-toggle-button">
            <i class="ion-chevron-left" id="pane-toggle-icon"></i>
          </button>
-       </div>
-     </div>
-  <div id="my-map"></div>
-</div>
+      </div>
+    </div>
+    <div id="my-map"></div>
+  </div>
 
-<!--Import Leaflet-->
-<script src="//unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-crossorigin=""></script>
-<!--Import Numeral-->
-<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-<!--Import Turf-->
-<script src='//npmcdn.com/@turf/turf/turf.min.js'></script>
-<!--Import Jquery-->
-<script
-src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!--Import google maps library
-API Key: AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY-->
- <script async defer
-     src="//maps.googleapis.com/maps/api/js?key=AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY"></script>
-<!--Import Papa Parse-->
-<script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.min.js" crossorigin=""></script>
-<!--Import Data-->
-<script src="data/cds123.js"></script>
-<script src="data/vacant_land.js"></script>
-<script src="data/gardens_.js"></script>
-<script src="js/side-pane_modal.js"></script>
-<script src="js/scripts.js"></script>
-<script src="js/layers.js"></script>
+  <!--Import package sources-->
+  <script src="//unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src='//npmcdn.com/@turf/turf/turf.min.js'></script>
+  <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyAAabVD58EnWQ8D1nZ2VDDarGeC4LTw-TY"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.min.js" crossorigin=""></script>
+  <!--Import Data and js sources-->
+  <script src="data/cds123.js"></script>
+  <script src="data/vacant_land.js"></script>
+  <script src="data/gardens_.js"></script>
+  <script src="js/side-pane_modal.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="js/layers.js"></script>
 
 </body>
+
 </html>

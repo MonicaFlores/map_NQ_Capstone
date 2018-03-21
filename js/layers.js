@@ -1,68 +1,65 @@
 //Set places contents
-var partnersArray = []  // empty array
-var educationalArray = []  // empty array
-var culturalArray = []  // empty array
+var partnersArray = [] // empty array
+var educationalArray = [] // empty array
+var culturalArray = [] // empty array
 
 getPlaces((places) => {
   places.forEach((place) => {
-		const typePalette = {
+    const typePalette = {
       NQ_Partners: 'GoldenRod ',
       Educational: 'DarkBlue',
       Cultural: 'Purple',
     };
-		const placeColor = typePalette[place.type];
-		const type = place.type;
-		const circleOptions = {
-			color: 'grey',
-			weight: 0.5,
-			radius: 4,
-			fillOpacity: 1,
-			fillColor: placeColor,
-			width: 0
-		}
+    const placeColor = typePalette[place.type];
+    const type = place.type;
+    const circleOptions = {
+      color: 'grey',
+      weight: 0.5,
+      radius: 4,
+      fillOpacity: 1,
+      fillColor: placeColor,
+      width: 0
+    }
     const latLon = [place.latitude, place.longitude];
 
-		if (type == 'NQ_Partners') {
-				partnersArray.push(
-				    L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
-		} else if (type == 'Educational') {
-			 	educationalArray.push(
-						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
-		} else  {
-				culturalArray.push(
-						L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
-		}
+    if (type == 'NQ_Partners') {
+      partnersArray.push(
+        L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name + '</h3>' + place.description));
+    } else if (type == 'Educational') {
+      educationalArray.push(
+        L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name + '</h3>' + place.description));
+    } else {
+      culturalArray.push(
+        L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name + '</h3>' + place.description));
+    }
   });
 
-//Create layer with amenities
-var partners  = L.layerGroup(partnersArray)
-var educational  = L.layerGroup(educationalArray)
-var cultural  = L.layerGroup(culturalArray)
+  //Create layer with amenities
+  var partners = L.layerGroup(partnersArray)
+  var educational = L.layerGroup(educationalArray)
+  var cultural = L.layerGroup(culturalArray)
 
-var amenitiesLayer = {
-		"NQ Partners": partners,
-		"Educational Institutions": educational,
-		"Cultural Institutions": cultural,
-};
+  var amenitiesLayer = {
+    "NQ Partners": partners,
+    "Educational Institutions": educational,
+    "Cultural Institutions": cultural,
+  };
 
-//Create layers for main vizualization
-var lotsArray = [landGeojson, gardensGeojson]
-var lots = L.layerGroup(lotsArray)
+  //Create layers for main vizualization
+  var lotsArray = [landGeojson, gardensGeojson]
+  var lots = L.layerGroup(lotsArray).addTo(map)
 
-var farArrayGar = [gardenFar]
-var airRightsGar = L.layerGroup(farArrayGar)
-
-var farArrayVac = [landFar]
-var airRightsVac = L.layerGroup(farArrayVac)
-
-var mainVizLayer = {
+  var mainVizLayer = {
     "Vacant/Garden": lots,
-    "Residential Air Rights-Gardens": airRightsGar,
-    "Residential Air Rights-Vacant Lots": airRightsVac,
-};
+    "Residential Air Rights-Vacant Lots": landFar,
+    "Residential Air Rights-Gardens": gardenFar,
+  };
 
-//add layers to map
-L.control.layers(mainVizLayer, amenitiesLayer, {collapsed:false, position: 'topright'}).addTo(map);
+  //add layers to map
+  L.control.layers(mainVizLayer, amenitiesLayer, {
+    collapsed: false,
+    position: 'topright'
+  }).addTo(map);
 });
 
 //Add event listeners for baselayerchange
@@ -97,7 +94,9 @@ function getPlaces(callback) {
     url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQrzyc8AryRyxoI6Hzxc1NoYQiBLoKhhlGLqDuMrKP_BNp8TIXos-SbY39dlPn2f-6BwiU1cK5Dz_a/pub?output=csv",
     type: "GET"
   }).done((csv) => {
-    const places = Papa.parse(csv, {header: true}).data;
+    const places = Papa.parse(csv, {
+      header: true
+    }).data;
     callback(places);
   });
 }

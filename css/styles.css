@@ -9,15 +9,9 @@
   left: 0;
   bottom: 0;
   width: 360px;
-  /* background: #f1f1f1; */
-  /* box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5); */
-  border-radius: 7px;
   background: #FFF;
   opacity: 0.9;
-  border-color: black;
-  border-width: 2px ;
   box-shadow: none;
-
 }
 
 .pane-collapsed {
@@ -48,12 +42,12 @@
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
-#pane-tabs{
+#pane-tabs {
   font-family: 'Roboto Condensed', monospace, sans-serif;
   font-size: 12px;
 }
 
-#paneTabsContent{
+#paneTabsContent {
   font-family: 'Roboto Condensed', monospace, sans-serif;
   font-size: 12px;
   text-align: left;
@@ -73,10 +67,6 @@
   border-radius: 10px;
   border-width: 1px;
 }
-/*
-#canvas {
-  height: 300px;
-} */
 
 /*********
 ** Map **
@@ -108,9 +98,9 @@
   padding: 12px;
   margin-left: 15px;
   font-family: 'Roboto Condensed', monospace, sans-serif;
-  border-radius:10px;
+  border-radius: 10px;
   border-style: dashed;
-  border-width: 2px ;
+  border-width: 2px;
   border-color: black;
   text-align: left;
   font-size: 12px;
@@ -118,20 +108,29 @@
   font-weight: 400;
 }
 
-.circleMarker:hover{
+.circleMarker:hover {
   border-style: dashed;
   border-color: black;
-  border-width: 2px ;
+  border-width: 2px;
 }
 
 /**********
 ** Popup **
 ***********/
+
 .leaflet-popup-content-wrapper {
-    font-family: 'Roboto Condensed', monospace, sans-serif;
-    font-size: 10px;
-    border-color: black;
-    border-width: 2px ;
+  font-family: 'Roboto Condensed', monospace, sans-serif;
+  font-size: 10px;
+  border-color: black;
+  border-width: 2px;
+}
+
+/***********
+** Modal **
+***********/
+
+#modal-box {
+  top: 25%;
 }
 
 /***********
@@ -142,15 +141,13 @@
   position: fixed;
   z-index: 1000;
   width: 340px;
-  height: 300px
-  left: 50%;
+  height: 300px left: 50%;
   bottom: 1%;
   margin-left: -10px;
 }
 
 .legend {
-  width:200px;
-
+  width: 200px;
   z-index: 1000;
   /* bottom: 10px; */
   float: left;
@@ -158,23 +155,22 @@
   padding: 10px;
   background: #e6e6e6;
   font-family: 'Roboto Condensed', sans-serif;
-  color:black;
-  border-radius:10px;
+  color: black;
+  border-radius: 10px;
   text-align: left;
   font-size: 12px;
   border-style: solid;
   border-color: black;
-  border-width: 2px ;
+  border-width: 2px;
 }
 
 #legend:hover {
   border-style: dashed;
-  border-width: 2px ;
+  border-width: 2px;
   border-color: grey;
 }
 
-.legendItem {
-}
+.legendItem {}
 
 .legendItem::before {
   content: '';
@@ -194,76 +190,93 @@
   background-color: #e80000;
   border-color: black;
 }
+
 .cgarden::before {
   background-color: #157a03;
   border-color: black;
 }
+
 .cds::before {
   background-color: white;
   fill-Opacity: 0.1;
   border-style: dashed;
   border-color: black;
-  border-width: 1.5px ;
+  border-width: 1.5px;
 }
+
 /* Air rights Garden legend */
+
 .Gard0::before {
   background-color: #FFF;
   border-color: black;
 }
+
 .Gard1::before {
   background-color: #ffffcc;
   border-color: black;
 }
+
 .Gard2::before {
   background-color: #c2e699;
   border-color: black;
 }
+
 .Gard3::before {
   background-color: #78c679;
   border-color: black;
 }
+
 .Gard4::before {
   background-color: #31a354;
   border-color: black;
 }
+
 .Gard5::before {
   background-color: #006837;
   border-color: black;
 }
+
 /* Air rights Vacant lots legend */
+
 .Vacant0::before {
   background-color: #FFF;
   border-color: black;
 }
+
 .Vacant1::before {
   background-color: #fef0d9;
   border-color: black;
 }
+
 .Vacant2::before {
   background-color: #fdcc8a;
   border-color: black;
 }
+
 .Vacant3::before {
   background-color: #fc8d59;
   border-color: black;
 }
+
 .Vacant4::before {
   background-color: #e34a33;
   border-color: black;
 }
+
 .Vacant5::before {
   background-color: #b30000;
   border-color: black;
 }
 
-/***********
-** Button **
-************/
+/************
+** Buttons **
+*************/
+
 button {
   outline: none;
   padding: 6px;
   border-style: solid;
-  border-width: 1px ;
+  border-width: 1px;
   border-color: black;
   background-color: white;
   border-radius: 15px;
@@ -271,18 +284,19 @@ button {
 }
 
 button:hover {
-    border-style: dashed;
-    border-width: 2px ;
+  border-style: dashed;
+  border-width: 2px;
 }
 
 #zoomOut {
-  float:right;
+  float: right;
   position: fixed;
   width: 70px;
   bottom: 10px;
 }
+
 #resetPano {
-  float:right;
+  float: right;
   position: fixed;
   width: 70px;
   bottom: 50px;
@@ -291,23 +305,26 @@ button:hover {
 /**********
 ** Texts **
 ***********/
+
 #lot-info {
   text-align: left;
 }
 
-body{
+body {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 12px;
   text-align: center;
   color: black;
   /*font-weight: 200;*/
 }
-h1{
+
+h1 {
   font-size: 15px;
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
 }
-h3{
+
+h3 {
   font-size: 15px;
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
@@ -316,25 +333,33 @@ h3{
 /************
 ** Links **
 *************/
+
 /* unvisited link */
+
 a:link {
-    color: black;
-    text-decoration: none;
-    font-weight: 800;
+  color: black;
+  text-decoration: none;
+  font-weight: 800;
 }
+
 /* visited link */
+
 a:visited {
-    color: black;
-    font-weight: 800;
+  color: black;
+  font-weight: 800;
 }
+
 /* mouse over link */
+
 a:hover {
-    color: black;
-    font-weight: 800;
-    text-decoration: underline;
+  color: black;
+  font-weight: 800;
+  text-decoration: underline;
 }
+
 /* selected link */
+
 a:active {
-    color: white;
-    font-weight: 200;
-    }
+  color: white;
+  font-weight: 200;
+}
