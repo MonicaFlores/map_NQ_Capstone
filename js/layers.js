@@ -21,7 +21,7 @@ getPlaces((places) => {
 			width: 0
 		}
     const latLon = [place.latitude, place.longitude];
-		//const popupcont = ['<h3> ' + place.name  + '</h3>' + place.description]
+
 		if (type == 'NQ_Partners') {
 				partnersArray.push(
 				    L.circleMarker(latLon, circleOptions).bindPopup('<h3> ' + place.name  + '</h3>' + place.description));
@@ -46,12 +46,8 @@ var amenitiesLayer = {
 };
 
 //Create layers for main vizualization
-
 var lotsArray = [landGeojson, gardensGeojson]
 var lots = L.layerGroup(lotsArray)
-
-// var zoningArray = [landZo, gardenZo]
-// var zoning = L.layerGroup(zoningArray)
 
 var farArrayGar = [gardenFar]
 var airRightsGar = L.layerGroup(farArrayGar)
@@ -59,71 +55,41 @@ var airRightsGar = L.layerGroup(farArrayGar)
 var farArrayVac = [landFar]
 var airRightsVac = L.layerGroup(farArrayVac)
 
-
 var mainVizLayer = {
     "Vacant/Garden": lots,
     "Residential Air Rights-Gardens": airRightsGar,
     "Residential Air Rights-Vacant Lots": airRightsVac,
-    // "Zoning": zoning,
 };
 
-// L.control.layers(null, amenitiesLayer, {collapsed:false, position: 'topright'}).addTo(map);
-// });
+//add layers to map
 L.control.layers(mainVizLayer, amenitiesLayer, {collapsed:false, position: 'topright'}).addTo(map);
 });
 
-
-// add event listeners for overlayadd and overlayremove
+//Add event listeners for baselayerchange
 map.on('baselayerchange', handleLayerToggle);
-// map.on('overlayremove', handleLayerToggle);
 
 function handleLayerToggle(eventLayer) {
-// get the name of the layergroup, and whether it is being added or removed
-var type = eventLayer.type;
-var name = eventLayer.name;
+  // get the name of the layergroup, and whether it is being added or removed
+  var type = eventLayer.type;
+  var name = eventLayer.name;
 
-// if being added, show the corresponding legend
-// else, hide it.
-if (eventLayer.type === 'baselayerchange') {
-  $('#' + name + '-legend').show();
-} else {
-  $('#' + name + '-legend').hide();
+  var nickname;
+
+  if (name === 'Vacant/Garden') {
+    nickname = 'lots';
+  } else if (name === 'Residential Air Rights-Vacant Lots') {
+    nickname = 'landFar';
+  } else {
+    nickname = 'gardenFar';
+  }
+  // if being added, show the corresponding legend. Else, hide it.
+  if (eventLayer.type === 'baselayerchange') {
+    $("[id$='-legend']").hide()
+    $('#' + nickname + '-legend').show();
+  } else {
+    $('#' + nickname + '-legend').hide();
+  }
 }
-}
-// lotsArray gardenFar landFar
-//
-// lotsArray-legend gardenFar-legend landFar-legend
-
-// map.on('baselayerchange', function(eo) {
-// if (eo.name === 'gardenFar') {
-//     $('#gardenFar-legend').show;
-//     $('#lotsArray-legend').hide;
-//     $('#landFar-legend').hide;
-// } else {
-//     $('#gardenFar-legend').hide;
-// }
-// });
-//
-// map.on('baselayerchange', function(eo) {
-// if (eo.name === 'landFar') {
-//     $('#landFar-legend').show;
-//     $('#lotsArray-legend').hide;
-//     $('#gardenFar-legend').hide;
-// } else {
-//     $('#landFar-legend').hide;
-// }
-// });
-//
-// map.on('baselayerchange', function(eo) {
-// if (eo.name === 'lotsArray') {
-//     $('#lotsArray-legend').show;
-//     $('#landFar-legend').hide;
-//     $('#gardenFar-legend').hide;
-// } else {
-//     $('#lotsArray-legend').hide;
-// }
-// });
-
 
 //Add amenities dataset
 function getPlaces(callback) {
