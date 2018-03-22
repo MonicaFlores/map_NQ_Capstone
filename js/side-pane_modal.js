@@ -1,23 +1,3 @@
-// Side pane collapse control
-$('#pane-toggle-button').click(() => {
-  $('#pane-container').toggleClass("pane-collapsed");
-
-  const isCollapsed = $('#pane-container').hasClass("pane-collapsed");
-
-  if (isCollapsed) {
-    $('#pane-toggle-icon').attr('class', 'ion-chevron-right');
-  } else {
-    $('#pane-toggle-icon').attr('class', 'ion-chevron-left');
-  }
-});
-
-// Expand the side pane
-const expandSidePane = () => {
-  if ($('#pane-container').hasClass("pane-collapsed")) {
-    $('#pane-toggle-button').click();
-  }
-}
-
 // Populate Side Pane with lot info.
 //Property title vacant land
 const getVacantTitle = (property) => {
@@ -25,6 +5,7 @@ const getVacantTitle = (property) => {
 					at ${property.Address}.<br/>`);
 }
 
+//Property title community gardens
 const getGardenTitle = (property) => {
   $('#lot-address').append(`<b style='font-size: 15px'; 'font-weight: 150%'; font-family: 'Roboto Mono', sans-serif; >${property.Name}</b> <br/>
 												${property.Garden_dev} Community Garden at ${property.Address}.<br/>`);
@@ -68,8 +49,6 @@ const getPano = (layer) => {
 const ClickHandlerVacant = (e) => {
   const layer = e.target;
   const property = layer.feature.properties;
-  // Update Side Pane for clicked lot
-  expandSidePane();
   //Fill in Property Title
   $('#lot-address').empty();
   getVacantTitle(property)
@@ -85,8 +64,6 @@ const ClickHandlerVacant = (e) => {
 const ClickHandlerGarden = (e) => {
   const layer = e.target;
   const property = layer.feature.properties;
-  // Update Side Pane for clicked lot
-  expandSidePane();
   // Fill in Property Info tab
   $('#lot-address').empty();
   getGardenTitle(property)
@@ -117,12 +94,14 @@ const vacantGardenStyles = (feature) => {
   };
 };
 
+//Style highlight iten when mouseover
 const mouseOverStyle = {
   weight: 0.5,
   color: 'grey',
   fillOpacity: 0.7,
 };
 
+//Mouseover action
 const mouseOverFeature = (e) => {
   const layer = e.target;
   const property = layer.feature.properties;
@@ -136,6 +115,7 @@ const mouseOverFeature = (e) => {
   layer.bringToFront();
 };
 
+//Mouse out reset style
 const mouseOutResetVacant = (e) => {
   const layer = e.target;
   layer.closePopup();
@@ -148,6 +128,7 @@ const mouseOutResetGarden = (e) => {
   gardensGeojson.resetStyle(layer);
 };
 
+//Actions to pass L.geoJSON
 const propertyActionsVacant = (feature, layer) => {
   layer.on({
     'click': ClickHandlerVacant,
@@ -184,6 +165,7 @@ function getFarColorVac(d) {
     '#FFF';
 }
 
+//Style gardens FAR
 const gardenFarStyles = (feature) => {
   const airRights = (feature.properties.ResidFAR * feature.properties.LotArea)
   return {
@@ -195,6 +177,7 @@ const gardenFarStyles = (feature) => {
   };
 };
 
+//Style vacant lots FAR
 const landFarStyles = (feature) => {
   const airRights = (feature.properties.ResidFAR * feature.properties.LotArea)
   return {
@@ -205,6 +188,7 @@ const landFarStyles = (feature) => {
   };
 };
 
+//Mouse out reset styles
 const mouseOutResetVacantFar = (e) => {
   const layer = e.target;
   layer.closePopup();
@@ -244,10 +228,6 @@ $(function() {
     html: true
   });
 });
-
-// Populate popover with content
-$('#popover-legend')
-  .data('content', "See <span class='link' id='data-tab-link'>About</span> for details");
 
 // Close popover on clicking elsewhere
 $(document).on('click', function(e) {

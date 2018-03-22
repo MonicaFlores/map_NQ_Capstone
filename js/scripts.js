@@ -1,8 +1,7 @@
 const mapOptions = {
   zoomControl: false,
   zoom: 13.5,
-  center: [40.818, -73.915],
-  // maxBounds: [[40.64417, -73.93005], [40.70014, -73.84718]]
+  center: [40.818, -73.915]
 }
 
 var map = L.map('my-map', mapOptions);
@@ -56,6 +55,7 @@ var gardenFar = L.geoJSON(gardens, {
   onEachFeature: propertyActionsGardenFar
 })
 
+//zoom out constants
 var defaultCenter = [40.818, -73.92];
 var defaultZoom = 13.5;
 

@@ -62,7 +62,7 @@
   margin-left: -10px;
 }
 
-#down-text-box{
+#down-text-box {
   position: fixed;
   z-index: 1000;
   width: 220px;
@@ -70,7 +70,7 @@
   margin-left: 10px;
 }
 
-#button-box{
+#button-box {
   position: fixed;
   z-index: 1000;
   width: 50px;
@@ -114,7 +114,7 @@
 }
 
 .leaflet-left .leaflet-control {
-    margin-left: 370px;
+  margin-left: 370px;
 }
 
 /************
@@ -174,7 +174,6 @@
   bottom: 10px;
   right: 12px;
 }
-
 
 .legend {
   position: fixed;
