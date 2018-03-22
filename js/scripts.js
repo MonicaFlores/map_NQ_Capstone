@@ -16,7 +16,7 @@ var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fast
 
 // Add zoom-control
 L.control.zoom({
-  position: 'bottomright'
+  position: 'bottomleft'
 }).addTo(map);
 
 //Add Community district boundaries
