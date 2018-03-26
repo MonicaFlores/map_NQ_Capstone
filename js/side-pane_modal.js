@@ -13,7 +13,7 @@ const getGardenTitle = (property) => {
 //Lot info for all lots (vacant and gardens)
 const getLotInfo = (property) => {
   $('#lot-info').append(`
-      <b style='font-size: 120%'> Owner:</b> ${property.BBL}.<br/>
+      <b style='font-size: 120%'> BBL:</b> ${property.BBL}.<br/>
 			<b style='font-size: 120%'> Owner:</b> ${property.OwnerName}.<br/>
 			<b style='font-size: 120%'> Area:</b> ${numeral(property.LotArea).format('0,0')} sqft.<br/>
 			<b style='font-size: 120%'> Zoning:</b> ${property.ZoneDist1}. <b style='margin-left: 5px'> Overlay:</b> ${property.Overlay1}.<br/>
